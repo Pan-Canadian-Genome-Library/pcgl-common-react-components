@@ -1,0 +1,23 @@
+{
+  "name": "@josepplloo/research-portal",
+  "version": "1.0.0",
+  "description": "Web components for PCGL",
+  "keywords": [
+    "react"
+  ],
+  "homepage": "https://github.com/Pan-Canadian-Genome-Library/research-portal#readme",
+  "bugs": {
+    "url": "https://github.com/Pan-Canadian-Genome-Library/research-portal/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pan-Canadian-Genome-Library/research-portal.git"
+  },
+  "license": "MIT",
+  "author": "C3G.ca",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  }
+}
