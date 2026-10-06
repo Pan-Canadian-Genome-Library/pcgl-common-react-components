@@ -1,5 +1,5 @@
 {
-  "name": "@josepplloo/research-portal",
+  "name": "@pan-canadian-genome-library/research-portal",
   "version": "1.0.0",
   "description": "Web components for PCGL",
   "keywords": [
@@ -19,5 +19,8 @@
   "main": "index.js",
   "scripts": {
     "test": "exit 0"
+  },
+  "publishConfig": {
+    "@pan-canadian-genome-library:registry": "https://npm.pkg.github.com"
   }
 }
