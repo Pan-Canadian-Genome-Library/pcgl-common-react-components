@@ -11,8 +11,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: {
-    appName: "Footer",
-    children: "I am a primary.",
-  },
+  args: {},
 };

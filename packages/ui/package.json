@@ -4,14 +4,8 @@
   "sideEffects": false,
   "license": "MIT",
   "exports": {
-    "./*": "./src/*.tsx"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "dist/src/*"
-      ]
-    }
+    "./footer": "./src/footer/index.ts",
+    "./*": "./src/*/index.ts"
   },
   "scripts": {
     "build": "tsup",

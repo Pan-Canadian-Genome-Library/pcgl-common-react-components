@@ -4,9 +4,12 @@ import './styles.css';
 type FooterNavItem = { link: string; url: string };
 type FooterNavItems = { title: string; items: FooterNavItem[] };
 type LinkItemProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & { url: string };
-type FooterContainerProps = { ContextualBand: React.ReactNode, PortalBand: React.ReactNode };
+export type FooterContainerProps = {
+  ContextualBand?: React.ReactNode;
+  PortalBand?: React.ReactNode;
+};
 
-const FooterContainer = ({ ContextualBand, PortalBand }: FooterContainerProps) => {
+export const FooterContainer = ({ ContextualBand, PortalBand }: FooterContainerProps) => {
   const t = (s:string) => s;
 
   const data = Array.from(FOOTER_DATA, (link) => ({
