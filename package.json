@@ -1,26 +1,21 @@
 {
-  "name": "@pan-canadian-genome-library/research-portal",
-  "version": "1.0.0",
-  "description": "Web components for PCGL",
-  "keywords": [
-    "react"
-  ],
-  "homepage": "https://github.com/Pan-Canadian-Genome-Library/research-portal#readme",
-  "bugs": {
-    "url": "https://github.com/Pan-Canadian-Genome-Library/research-portal/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Pan-Canadian-Genome-Library/research-portal.git"
-  },
-  "license": "MIT",
-  "author": "C3G.ca",
-  "type": "module",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "exit 0"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter=docs^... && changeset publish",
+    "preview-storybook": "turbo run preview-storybook"
   },
-  "publishConfig": {
-    "@pan-canadian-genome-library:registry": "https://npm.pkg.github.com"
-  }
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3",
+    "prettier": "^3.9.9",
+    "turbo": "^2.11.7"
+  },
+  "packageManager": "pnpm@12.9.1",
+  "name": "research-portal-components"
 }
