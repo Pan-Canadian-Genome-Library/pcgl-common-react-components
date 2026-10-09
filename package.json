@@ -9,7 +9,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build --filter=docs^... && changeset publish",
-    "preview-storybook": "turbo run preview-storybook"
+    "storybook": "pnpm --filter docs storybook"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",

@@ -8,8 +8,9 @@
     "./*": "./src/*/index.ts"
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "build": "pnpm typecheck && tsup",
+    "dev": "pnpm typecheck && tsup --watch",
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf .turbo node_modules dist"
   },

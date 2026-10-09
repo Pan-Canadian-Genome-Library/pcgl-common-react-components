@@ -11,13 +11,27 @@
 
 .focus-ring:focus,
 .focus-ring:focus-visible {
-  outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
+  outline: var(--line-width-focus) solid var(--ant-color-primary-border);
   outline-offset: 1px;
 }
 
+@property --brand-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #054A74;
+}
+
 .pcgl-footer {
-  background-color: #004b75;
-  color: white;
+  --brand-color: attr(data-brand-color color);
+  --contrast-color: contrast-color(var(--brand-color));
+  --contrast-color-p: color-mix(in srgb, var(--contrast-color), black 10%);
+  --contrast-color-link: color-mix(in srgb, var(--contrast-color), black 15%);
+  
+  background-color: var(--brand-color);
+  color: var(--contrast-color);
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  text-align: start;
   padding: 24px;
   font-size: 14px;
   container-type: inline-size;
@@ -26,7 +40,7 @@
   gap: 16px;
 
   & p {
-    color: #b1c0c9;
+    color: var(--contrast-color-p);
     font-size: 14px;
     margin: 0;
   }
@@ -38,14 +52,14 @@
 
   .link-item {
     font-size: 14px;
-    color: #d9d9d9;
+    color: var(--contrast-color-link);
     text-decoration: underline;
 
     &:hover {
-      color: white;
+      color: (var(--contrast-color));
 
       img {
-        filter: drop-shadow(white 1px 1px 4px);
+        filter: drop-shadow(var(--contrast-color) 1px 1px 4px);
       }
     }
 
@@ -85,7 +99,6 @@
 .main-band {
   align-items: start;
   border-block: 1px solid color-mix(in srgb, currentColor 50%, transparent);
-  ;
   column-gap: 16px;
   display: grid;
   grid-template-areas:
@@ -104,6 +117,7 @@
   }
 
   .meta {
+    align-items: start;
     display: grid;
     gap: 8px;
   }
@@ -161,87 +175,5 @@
     .contextual-logos {
       max-width: 240px;
     }
-  }
-}
-
-.bento-footer {
-  column-gap: 24px;
-  display: grid;
-  grid-template-areas:
-    "about"
-    "links"
-    "legal"
-    "c3g";
-  grid-template-columns: 1fr;
-  row-gap: 16px;
-  color: #d9d9d9;
-}
-
-.bento-footer {
-
-  p,
-  h3 {
-    margin: 0;
-    padding: 0;
-  }
-
-  .bento-logo {
-    max-width: 96px;
-    height: auto;
-    vertical-align: central;
-  }
-
-  .c3g-logo {
-    max-width: 45px;
-    height: auto;
-    filter: grayscale(100%);
-  }
-
-  .gpl-logo {
-    max-width: 24px;
-    height: auto;
-  }
-
-  .about {
-    display: grid;
-    grid-area: about;
-    gap: 8px;
-    justify-items: start;
-  }
-
-  .links {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    grid-area: links;
-    display: grid;
-    gap: 12px;
-  }
-
-  .legal {
-    grid-area: legal;
-    align-self: end;
-  }
-
-  .c3g {
-    align-self: end;
-    gap: 6px;
-    grid-area: c3g;
-    display: grid;
-    justify-items: center;
-  }
-}
-
-@container (width > 640px) {
-  .bento-footer {
-    column-gap: 96px;
-    grid-template-areas:
-      "about links"
-      "legal c3g";
-    grid-template-columns: 1fr;
-  }
-
-  .bento-footer .links {
-    grid-auto-flow: column;
   }
 }

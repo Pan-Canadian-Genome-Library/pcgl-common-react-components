@@ -1,34 +1,44 @@
+import { type ComponentPropsWithRef, type CSSProperties } from 'react';
 import FOOTER_DATA from './data.json';
+import fundersLogo from './funders.svg';
 import './styles.css';
 
-type FooterNavItem = { link: string; url: string };
-type FooterNavItems = { title: string; items: FooterNavItem[] };
-type LinkItemProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & { url: string };
-export type FooterContainerProps = {
+export type FooterNavItem = { link: string; url: string };
+export type FooterNavItems = { title: string; items: FooterNavItem[] };
+export type LinkItemProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & { url: string };
+export interface FooterProps extends ComponentPropsWithRef<'footer'> {
   ContextualBand?: React.ReactNode;
   PortalBand?: React.ReactNode;
+  brand?: string;
+  translator: (s:string) => string;
 };
+interface CustomStyles extends CSSProperties {
+  '--brand-color'?: string;
+}
 
-export const FooterContainer = ({ ContextualBand, PortalBand }: FooterContainerProps) => {
-  const t = (s:string) => s;
+export const FooterContainer = ({ ContextualBand, PortalBand, brand='#054A74', translator, ...props }: FooterProps) => {
+  const {ref, style} = props;
+  const footerStyle: CustomStyles = {
+    '--brand-color': brand,
+  }
 
   const data = Array.from(FOOTER_DATA, (link) => ({
-    title: t(`footer.sections.${link.title}`),
+    title: translator(`footer.sections.${link.title}`),
     items: link.items.map((item) => ({
-      link: t(`footer.links.${item.link}`),
-      url: t(`footer.urls.${item.url}`),
+      link: translator(`footer.links.${item.link}`),
+      url: translator(`footer.urls.${item.url}`),
     })),
   }));
 
   return (
-    <footer className="pcgl-footer">
+    <footer data-test-id="pcgl-footer" className="pcgl-footer" data-brand-color={brand} style={{...footerStyle, ...style}} ref={ref}>
       <>{ ContextualBand }</>
       <div className="main-band">
         <FooterView sections={data} />
         <div className="meta">
-          <LinkHeader>{t('footer.meta.funding_title')}</LinkHeader>
-          <img className="meta-logo" src="./funders.svg" role="presentation" alt="" width={423} height={95} />
-          <p>{t('footer.meta.cihr_support')}</p>
+          <LinkHeader>{translator('footer.meta.funding_title')}</LinkHeader>
+          <img className="meta-logo" src={fundersLogo} role="presentation" alt="" width={423} height={95} />
+          <p>{translator('footer.meta.cihr_support')}</p>
         </div>
       </div>
       <>{ PortalBand }</>
