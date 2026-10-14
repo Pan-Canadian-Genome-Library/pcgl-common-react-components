@@ -1,3 +1,5 @@
+/// <reference types="@testing-library/jest-dom/vitest" />
+
 declare module "*.svg";
 declare module "*.jpg";
 declare module "*.jpeg";

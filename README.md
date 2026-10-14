@@ -19,6 +19,7 @@ apps/
 packages/
 ├── eslint-config/     <-- Shared eslint config.
 ├── typescript-config/ <-- Shared typescript config.
+├── vitest-config/     <-- Shared vitest config.
 └── ui/                <-- Root folder for all the components.
     ├── src/footer     <-- Example of a component.
     └── ...   
@@ -41,6 +42,7 @@ Fell free to explore the different commands locating the script section in each 
 - `pnpm build` - Build all packages, including the Storybook site
 - `pnpm changeset` - Generate a changeset
 - `pnpm clean` - Clean up all `node_modules` and `dist` folders (runs each package's clean script)
+- `pnpm test:ui` - Execute the unit test
 
 
 ## Apps & Packages
@@ -51,6 +53,8 @@ This Turborepo includes the following packages and applications:
 - `packages/ui`: Core React components
 - `packages/typescript-config`: Shared `tsconfig.json`s used throughout the Turborepo
 - `packages/eslint-config`: ESLint preset
+- `packages/vitest-config`: vitest shared config
+
 
 ### Compilation
 
@@ -111,3 +115,4 @@ As well as a few others tools preconfigured:
 - [Prettier](https://prettier.io) for code formatting
 - [Changesets](https://github.com/changesets/changesets) for managing versioning and changelogs
 - [GitHub Actions](https://github.com/changesets/action) for fully automated package publishing
+- [Vitest](https://vercel.com/academy/production-monorepos/set-up-vitest) for fully understanding the testing

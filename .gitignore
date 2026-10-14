@@ -13,3 +13,6 @@ public/dist
 storybook-static/
 .agents
 skills-lock.json
+
+# Testing
+coverage

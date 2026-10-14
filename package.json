@@ -9,12 +9,16 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build --filter=docs^... && changeset publish",
-    "storybook": "pnpm --filter docs storybook"
+    "storybook": "pnpm --filter docs storybook",
+    "test:ui": "vitest run",
+    "test:ui:watch": "vitest --watch"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
+    "@repo/vitest-config": "workspace:*",
     "prettier": "^3.9.9",
-    "turbo": "^2.11.7"
+    "turbo": "^2.11.7",
+    "vitest": "^5.0.4"
   },
   "packageManager": "pnpm@12.9.1",
   "name": "research-portal-components"

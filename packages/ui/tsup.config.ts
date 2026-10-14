@@ -1,8 +1,13 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig((options) => ({
-  entryPoints: ["src/**/*.ts", "src/**/*.tsx"],
-    exclude: ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.tsx"],
+  entryPoints: [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "!src/**/tests/**",
+    "!src/**/*.test.*",
+    "!src/**/*.stories.*",
+  ],
   format: ["cjs", "esm"],
   external: ["react"],
   ...options,
