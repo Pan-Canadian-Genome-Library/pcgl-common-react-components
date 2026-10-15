@@ -5,11 +5,13 @@ This repo contains the implementation of the common elements across PCGL portals
 ## Using this Repo
 We are managing multiple packages in a monorepo, this is why PNPM shines 🪩 ✨.
 
-> [!NOTE] This repo use `pnpm` 12.x and `node` v24.x Please install `pnpm`  
+> [!NOTE] 
+> This repo use `pnpm` 12.x and `node` v24.x Please install `pnpm`  
 
 > pnpm 12 only needs Node.js when it is installed from npm; the version installed by the standalone script runs without Node.js.
 
-> [!IMPORTANT] Remember Where you are! `pwd` You are in a monorepo and thats matter because you have different pieces of software in the same project. 
+> [!IMPORTANT]
+> Remember Where you are! `pwd` You are in a monorepo and thats matter because you have different pieces of software in the same project. 
 
 ### Folders structure
 
@@ -32,7 +34,8 @@ Fell free to explore the different commands locating the script section in each 
 
 - `pnpm install` - Install the dependencies for all packages.
 
-> [!NOTE] If you are not familiar with `storybook` use the `dev` command.
+> [!NOTE]
+> If you are not familiar with `storybook` use the `dev` command.
 
 > `pnpm dev`
 
