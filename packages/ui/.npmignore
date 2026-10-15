@@ -1,0 +1,10 @@
+# Exclude test directories
+test/
+tests/
+__tests__/
+
+# Exclude specific test file patterns
+*.test.js
+*.spec.js
+*.test.ts
+*.spec.ts
