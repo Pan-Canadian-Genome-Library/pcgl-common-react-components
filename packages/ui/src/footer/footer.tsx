@@ -36,9 +36,9 @@ export const FooterContainer = ({ ContextualBand, PortalBand, brand='#054A74', t
       <div className="main-band">
         <FooterView sections={data} />
         <div className="meta">
-          <LinkHeader>{translator('footer.meta.funding_title')}</LinkHeader>
+          <LinkHeader>{translator('footer.meta.fundingTitle')}</LinkHeader>
           <img className="meta-logo" src={fundersLogo} role="presentation" alt="" width={423} height={95} />
-          <p>{translator('footer.meta.cihr_support')}</p>
+          <p>{translator('footer.meta.cihrSupport')}</p>
         </div>
       </div>
       <>{ PortalBand }</>

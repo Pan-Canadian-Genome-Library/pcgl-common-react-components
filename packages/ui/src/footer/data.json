@@ -3,8 +3,6 @@
     "title": "about",
     "items": [
       { "link": "pcglWebsite", "url": "pcglWebsite" },
-      { "link": "policies", "url": "policies" },
-      { "link": "privacy", "url": "privacy" },
       { "link": "termsConditions", "url": "termsConditions" },
       { "link": "publicationPolicy", "url": "publicationPolicy" }
     ]
@@ -15,9 +13,7 @@
       { "link": "helpGuides", "url": "helpGuides" },
       { "link": "dataSubmissionSystem", "url": "dataSubmissionSystem" },
       { "link": "dacoPlatform", "url": "dacoPlatform" },
-      { "link": "researchPlatform", "url": "researchPlatform" },
-      { "link": "TRE", "url": "TRE" },
-      { "link": "participantPortal", "url": "participantPortal" }
+      { "link": "researchPlatform", "url": "researchPlatform" }
     ]
   },
   {
