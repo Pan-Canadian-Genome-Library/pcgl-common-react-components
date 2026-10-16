@@ -12,5 +12,7 @@ export default defineConfig((options) => ({
   format: ["cjs", "esm"],
   external: ["react"],
   clean: true,
+  injectStyle: true,
+  loader: {".svg": "dataurl", },
   ...options,
 }));
