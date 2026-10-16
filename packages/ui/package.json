@@ -3,14 +3,33 @@
   "version": "0.0.0",
   "sideEffects": false,
   "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
-    "./footer": "./src/footer/index.ts",
-    "./*": "./src/*/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    },
+    "./footer": {
+      "types": "./dist/footer/index.d.ts",
+      "import": "./dist/footer/index.mjs",
+      "default": "./dist/footer/index.js"
+    },
+    "./*": {
+      "types": "./dist/*/index.d.ts",
+      "import": "./dist/*/index.mjs",
+      "default": "./dist/*/index.js" 
+    }
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "pnpm typecheck && tsup",
-    "dev": "pnpm typecheck && tsup --watch",
+    "build": "tsup && tsc --emitDeclarationOnly",
+    "dev": "tsc --emitDeclarationOnly && tsup --watch",
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf .turbo node_modules dist",
     "test": "vitest run",
@@ -32,5 +51,8 @@
   "dependencies": {
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
