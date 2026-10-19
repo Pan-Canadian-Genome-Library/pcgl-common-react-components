@@ -6,13 +6,13 @@ import { FooterContainer } from '../footer';
 describe('FooterContainer', () => {
   const mockTranslator = (key: string) => {
     const translations: Record<string, string> = {
-      'footer.sections.about': 'About Us',
-      'footer.links.privacy': 'Privacy Policy',
-      'footer.urls.privacy': 'https://example.com/privacy',
-      'footer.links.termsConditions': 'Terms',
-      'footer.urls.termsConditions': '/terms',
-      'footer.meta.funding_title': 'Supported By',
-      'footer.meta.cihr_support': 'Funded by CIHR',
+      'footer.section.about': 'About Us',
+      'footer.label.dacoPlatform': 'DACO Platform',
+      'footer.href.dacoPlatform': 'https://example.com/daco',
+      'footer.label.researchPlatform': 'Research Portal',
+      'footer.href.researchPlatform': '/rportal',
+      'footer.meta.fundingTitle': 'Supported By',
+      'footer.meta.cihrSupport': 'Funded by CIHR',
     };
     return translations[key] ?? key;
   };
@@ -26,18 +26,19 @@ describe('FooterContainer', () => {
     expect(footer.style.getPropertyValue('--brand-color')).toBe('#054A74');
     expect(screen.getByText('About Us')).toBeInTheDocument();
     expect(screen.getByText('Supported By')).toBeInTheDocument();
+    return container;
   });
 
   it('handles external vs internal links correctly', () => {
     render(<FooterContainer translator={mockTranslator} />);
 
-    const externalLink = screen.getByRole('link', { name: 'Privacy Policy' });
-    expect(externalLink).toHaveAttribute('href', 'https://example.com/privacy');
+    const externalLink = screen.getByRole('link', { name: 'DACO Platform' });
+    expect(externalLink).toHaveAttribute('href', 'https://example.com/daco');
     expect(externalLink).toHaveAttribute('target', '_blank');
     expect(externalLink).toHaveAttribute('rel', 'noreferrer');
 
-    const internalLink = screen.getByRole('link', { name: 'Terms' });
-    expect(internalLink).toHaveAttribute('href', '/terms');
+    const internalLink = screen.getByRole('link', { name: 'Research Portal' });
+    expect(internalLink).toHaveAttribute('href', '/rportal');
     expect(internalLink).not.toHaveAttribute('target');
     expect(internalLink).not.toHaveAttribute('rel');
   });
@@ -48,6 +49,7 @@ describe('FooterContainer', () => {
         translator={mockTranslator}
         ContextualBand={<div data-test-id="context-band">Context</div>}
         PortalBand={<div data-test-id="portal-band">Portal</div>}
+        footerItems={[]}
       />
     );
 
