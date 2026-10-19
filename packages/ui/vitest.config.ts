@@ -1,5 +1,3 @@
-import '@testing-library/jest-dom/vitest';
-
 import { defineConfig } from "vitest/config";
 import { sharedConfig } from "@repo/vitest-config";
 
