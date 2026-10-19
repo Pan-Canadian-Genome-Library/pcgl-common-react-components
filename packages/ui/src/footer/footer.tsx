@@ -11,18 +11,19 @@ export interface FooterProps extends ComponentPropsWithRef<'footer'> {
   PortalBand?: React.ReactNode;
   brand?: string;
   translator: (s:string) => string;
+  footerItems?: FooterNavItems[]
 };
 interface CustomStyles extends CSSProperties {
   '--brand-color'?: string;
 }
 
-export const FooterContainer = ({ ContextualBand, PortalBand, brand='#054A74', translator, ...props }: FooterProps) => {
+export const FooterContainer = ({ ContextualBand, PortalBand, brand='#054A74', translator, footerItems=FOOTER_DATA, ...props }: FooterProps) => {
   const {ref, style} = props;
   const footerStyle: CustomStyles = {
     '--brand-color': brand,
   }
 
-  const data = Array.from(FOOTER_DATA, (link) => ({
+  const data = Array.from(footerItems, (link) => ({
     title: translator(`footer.sections.${link.title}`),
     items: link.items.map((item) => ({
       link: translator(`footer.links.${item.link}`),
