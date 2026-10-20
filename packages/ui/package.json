@@ -19,6 +19,11 @@
       "import": "./dist/footer/index.mjs",
       "default": "./dist/footer/index.js"
     },
+    "./header": {
+      "types": "./dist/header/index.d.ts",
+      "import": "./dist/header/index.mjs",
+      "default": "./dist/header/index.js"
+    },
     "./*": {
       "types": "./dist/*/index.d.ts",
       "import": "./dist/*/index.mjs",
