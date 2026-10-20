@@ -18,17 +18,17 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       {
         type: "add",
         path: "{{turbo.paths.root}}/packages/ui/src/{{pascalCase name}}/{{pascalCase name}}.tsx",
-        templateFile: "templates/component.hbs",
+        templateFile: "templates/ui-component-generator.hbs",
       },
       {
         type: "add",
         path: "{{turbo.paths.root}}/packages/ui/src/{{pascalCase name}}/tests/{{pascalCase name}}.test.tsx",
-        templateFile: "templates/test.hbs",
+        templateFile: "templates/ui-test-generator.hbs",
       },
       {
         type: "add",
         path: "{{turbo.paths.root}}/apps/docs/src/stories/{{pascalCase name}}.stories.tsx",
-        templateFile: "templates/storybook.hbs",
+        templateFile: "templates/ui-storybook-generator.hbs",
       },
     ],
   });
