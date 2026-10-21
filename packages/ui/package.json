@@ -5,6 +5,9 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
     "dist"
   ],
@@ -14,6 +17,7 @@
       "import": "./dist/index.mjs",
       "default": "./dist/index.js"
     },
+    "./styles.css": "./dist/index.css",
     "./footer": {
       "types": "./dist/footer/index.d.ts",
       "import": "./dist/footer/index.mjs",
@@ -27,12 +31,17 @@
     "./*": {
       "types": "./dist/*/index.d.ts",
       "import": "./dist/*/index.mjs",
-      "default": "./dist/*/index.js" 
+      "default": "./dist/*/index.js"
     }
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "tsup && tsc --emitDeclarationOnly",
+    "build:styles": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
+    "build:components": "tsup && tsc --emitDeclarationOnly",
+    "build": "pnpm run build:components && pnpm run build:styles",
+    "check-types": "tsc --noEmit",
+    "dev:styles": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
+    "dev:components": "tsc --emitDeclarationOnly && tsup --watch",
     "dev": "tsc --emitDeclarationOnly && tsup --watch",
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf .turbo node_modules dist",
@@ -41,13 +50,16 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@repo/tailwind-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@repo/vitest-config": "workspace:*",
+    "@tailwindcss/cli": "4.3.3",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "eslint": "^10.12.0",
+    "tailwindcss": "4.3.3",
     "tsup": "^8.5.1",
     "typescript": "7.0.2",
     "vitest": "^5.0.4"

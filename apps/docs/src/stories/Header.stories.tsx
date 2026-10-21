@@ -16,6 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const LoggedOut: Story = {
   args: {
     brand: "#054A74",
+    skipLinks: [{ href:'#main', label: 'label.main' }, { href: '#footer', label: 'label.about'}],
     ImageLogo: () => (
       <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", color: "#054A74", fontWeight: 700, fontSize: "18px" }}>
         <span style={{ background: "#054A74", color: "#fff", padding: "4px 8px", borderRadius: "4px", marginRight: "8px" }}>PCGL</span>

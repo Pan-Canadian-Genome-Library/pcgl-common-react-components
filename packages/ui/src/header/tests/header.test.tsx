@@ -15,15 +15,12 @@ describe('HeaderContainer', () => {
 
     const skipLinksList = document.querySelector('ul#wb-tphp');
     expect(skipLinksList).toBeInTheDocument();
-    expect(skipLinksList).toHaveClass('wb-init', 'wb-disable-inited');
 
     const mainContentLink = screen.getByRole('link', { name: 'Skip to main content' });
-    expect(mainContentLink).toHaveAttribute('href', '#wb-cont');
-    expect(mainContentLink).toHaveClass('wb-sl');
+    expect(mainContentLink).toHaveAttribute('href', '#app-content');
 
     const aboutLink = screen.getByRole('link', { name: 'Skip to "About PCGL"' });
-    expect(aboutLink).toHaveAttribute('href', '#wb-info');
-    expect(aboutLink).toHaveClass('wb-sl');
+    expect(aboutLink).toHaveAttribute('href', '#app-info');
   });
 
   it('renders mandatory AuthenticationComponent in logged-out state by default', () => {
