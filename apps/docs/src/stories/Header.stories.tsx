@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const LoggedOut: Story = {
   args: {
-    brand: "#054A74",
+    brandColor: "#054A74",
     skipLinks: [{ href:'#main', label: 'label.main' }, { href: '#footer', label: 'label.about'}],
     ImageLogo: () => (
       <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", color: "#054A74", fontWeight: 700, fontSize: "18px" }}>
@@ -78,32 +78,77 @@ export const LoggedIn: Story = {
   },
 };
 
+export const MinimalLoggedIn: Story = {
+  args: {
+    brandColor: "#054A74",
+    auth: {
+      user: {
+        name: "Dr. Jane Smith",
+        email: "jane.smith@alliancecan.ca",
+      },
+    }
+  },
+};
+
 export const Minimal: Story = {
   args: {
-    brand: "#054A74",
+    brandColor: "#054A74",
     auth: {
       loginUrl: "https://cilogon.org/",
     },
   },
 };
 
-export const BilingualFrench: Story = {
+export const PCGLExample: Story = {
   args: {
-    ...LoggedIn.args,
-    translator: (key: string) => {
-      const dict: Record<string, string> = {
-        "header.skipLinks.mainContent": "Passer au contenu principal",
-        "header.skipLinks.about": "Passer à « À propos de la BPCG »",
-        "header.auth.login": "Service CILogon",
-        "header.auth.mySettings": "Mes paramètres",
-        "header.auth.logOut": "Se déconnecter",
-      };
-      return dict[key] ?? key;
-    },
     auth: {
       user: {
         name: "Dr. Jean Dupont",
       },
     },
+    children: 
+    <div style={{display: 'flex', width: '100%', justifyContent:'space-between'}}>
+      <div>
+        <img
+          alt="logo"
+          aria-hidden="true"
+          style={{
+            height: '40px',
+            verticalAlign: 'middle',
+            transform: 'translateY(-3px)',
+            paddingLeft: '4px'
+          }}
+          src="https://pcgl.bento.sd4h.ca/public/assets/branding.lightbg.png"
+        />
+        <h1
+          className="visually-hidden"
+          style={{ whiteSpace: 'nowrap' }}
+        >
+          Pan-Canadian Genome Library
+        </h1>
+      </div>
+
+      <button
+        type="button"
+        style={{display: 'flex', alignItems: 'center'}}
+      >
+        <span className="ant-btn-icon">
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            strokeWidth="0"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            style={{ transform: 'translateY(1px)' }}
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M5 15V17C5 18.0544 5.81588 18.9182 6.85074 18.9945L7 19H10V21H7C4.79086 21 3 19.2091 3 17V15H5ZM18 10L22.4 21H20.245L19.044 18H14.954L13.755 21H11.601L16 10H18ZM17 12.8852L15.753 16H18.245L17 12.8852ZM8 2V4H12V11H8V14H6V11H2V4H6V2H8ZM17 3C19.2091 3 21 4.79086 21 7V9H19V7C19 5.89543 18.1046 5 17 5H14V3H17ZM6 6H4V9H6V6ZM10 6H8V9H10V6Z" />
+          </svg>
+        </span>
+        <span>Français</span>
+      </button>
+    </div>
   },
 };

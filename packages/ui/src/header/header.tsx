@@ -1,8 +1,31 @@
 import {
+  Children,
   type ComponentPropsWithRef,
   type CSSProperties,
   type ReactNode,
 } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+
+export const headerLinkVariants = cva(
+  "ui:transition-colors focus:ui:outline-2 focus:ui:outline-offset-2 focus-visible:ui:outline-2 focus-visible:ui:outline-offset-2 ",
+  {
+    variants: {
+      variant: {
+        skipLink:
+          "ui:bg-black ui:text-white ui:underline ui:sr-only ui:focus:not-sr-only",
+        outlined:
+          "ui:inline-flex ui:items-center ui:gap-2 ui:px-3.5 ui:py-2 ui:text-sm ui:font-medium ui:rounded-md ui:no-underline ui:border ui:border-[var(--brand-color,#054a74)] ui:text-[var(--brand-color,#054a74)] hover:ui:bg-neutral-100",
+        dropdownItem:
+          "ui:block ui:w-full ui:px-4 ui:py-2 ui:text-sm ui:text-black ui:text-left ui:bg-transparent ui:border-none ui:hover:border-black/10 ui:hover:bg-gray-100 ui:cursor-pointer ui:box-border",
+      },
+    },
+    defaultVariants: {
+      variant: "outlined",
+    },
+  }
+);
+
+export type HeaderLinkVariants = VariantProps<typeof headerLinkVariants>;
 
 export interface SkipLinkItem {
   href: string;
@@ -55,7 +78,7 @@ interface CustomStyles extends CSSProperties {
 }
 
 export const HeaderContainer = ({
-  brandColor = "#054A74",
+  brandColor="#054A74",
   skipLinks,
   AccessibilityLinks: AccessibilityLinksProp,
   MenuOptions,
@@ -94,7 +117,7 @@ export const HeaderContainer = ({
   return (
     <div
       data-test-id="pcgl-header-container"
-      className="pcgl-header-container ui:w-full"
+      className="pcgl-header-container ui:w-full ui:@container/header"
       data-brand-color={brandColor}
       style={{ ...headerStyle, ...style }}
       ref={ref}
@@ -107,8 +130,8 @@ export const HeaderContainer = ({
       >
         {(MenuOptions || ImageLogo) && (
           <div className="pcgl-header-start ui:flex ui:items-center ui:gap-4 ui:shrink-0">
-            {renderSlot(MenuOptions)}
             {renderSlot(ImageLogo)}
+            {renderSlot(MenuOptions)}
           </div>
         )}
         {SearchBar && (
@@ -116,6 +139,7 @@ export const HeaderContainer = ({
             {renderSlot(SearchBar)}
           </div>
         )}
+        <>{props.children}</>
         <div className="pcgl-header-end ui:flex ui:items-center ui:gap-4 ui:ml-auto ui:shrink-0">
           {renderedAuthComponent}
         </div>
@@ -157,12 +181,12 @@ export const AccessibilityLinks = ({
     <ul
       id="wb-tphp"
       data-test-id="skip-links"
-      className="ui:absolute ui:text-xl ui:left-1/2"
+      className="ui:absolute ui:text-xl ui:left-1/2 ui:z-[1000]"
     >
       {items.map((link) => (
         <li key={link.href} className="ui:list-none">
           <a
-            className="ui:bg-black ui:text-white ui:underline ui:sr-only ui:focus:not-sr-only"
+            className={headerLinkVariants({ variant: "skipLink" })}
             href={link.href}
           >
             {link.label}
@@ -204,11 +228,11 @@ export const AuthenticationComponent = ({
         data-test-id="pcgl-auth"
       >
         <details
-          className="pcgl-auth-details ui:relative ui:inline-block ui:group"
+          className="pcgl-auth-details ui:relative ui:inline-block ui:rounded-md ui:bg-white ui:p-1 ui:outline ui:outline-black/5 ui:group ui:open:border-black/10 ui:open:bg-gray-100"
           data-test-id="pcgl-auth-details"
         >
           <summary
-            className="ui:border ui-border-brand ui:inline-flex ui:items-center ui:gap-2.5 ui:px-3 ui:py-1.5 ui:rounded-md ui:bg-white ui:text-black ui:text-sm ui:font-medium hover:ui:cursor focus-visible:ui:outline-2 focus-visible:ui:outline-offset-2 ui:cursor-pointer ui:select-none ui:list-none [&::-webkit-details-marker]:ui:hidden"
+            className={`ui:flex ui:items-center ui:gap-4 ui:cursor-pointer ui:select-none ui:list-none [&::-webkit-details-marker]:ui:hidden`}
             data-test-id="pcgl-auth-summary"
             aria-label={`User menu for ${user.name}`}
           >
@@ -231,11 +255,11 @@ export const AuthenticationComponent = ({
                 <line x1="3" y1="18" x2="21" y2="18" />
               </svg>
             </span>
-            <span className="pcgl-auth-username ui:font-semibold ui:text-pcgl-text-dark">
+            <span className="pcgl-auth-username ui:font-semibold ui:text-pcgl-text-dark ui:hidden ui:@md/header:inline-flex">
               {user.name}
             </span>
             <span
-              className="pcgl-auth-chevron ui:inline-flex ui:items-center ui:transition-transform ui:duration-200 group-open:ui:rotate-180"
+              className="pcgl-auth-chevron ui:inline-flex ui:items-center ui:transition-transform ui:duration-200 ui:group-open:rotate-180"
               aria-hidden="true"
             >
               <svg
@@ -253,7 +277,7 @@ export const AuthenticationComponent = ({
             </span>
           </summary>
           <div
-            className="pcgl-auth-dropdown ui:absolute ui:top-[calc(100%+6px)] ui:right-0 ui:min-w-[180px] ui:bg-white ui:rounded-lg ui:shadow-xl ui:py-1.5 ui:z-[1000] ui:flex ui:flex-col"
+            className="pcgl-auth-dropdown ui:absolute ui:top-[calc(100%+6px)] ui:right-0 ui:min-w-[180px] ui:bg-white ui:rounded-lg ui:outline ui:outline-black/5 ui:shadow-xl ui:py-1.5 ui:z-[1000] ui:flex ui:flex-col"
             role="menu"
           >
             {SettingsSlot ? (
@@ -262,7 +286,10 @@ export const AuthenticationComponent = ({
               <a
                 href={settingsUrl}
                 onClick={onSettingsClick}
-                className="pcgl-auth-dropdown-item ui:block ui:w-full ui:px-4 ui:py-2 ui:text-sm ui:text-black ui:text-left ui:bg-transparent ui:border-none hover:ui:bg-neutral-100 ui:transition-colors focus:ui:outline-2 focus:ui:outline-offset-2 focus-visible:ui:outline-2 focus-visible:ui:outline-offset-2 ui:cursor-pointer ui:box-border"
+                className={headerLinkVariants({
+                  variant: "dropdownItem",
+                  className: "pcgl-auth-dropdown-item",
+                })}
                 role="menuitem"
               >
                 {resolvedSettingsLabel}
@@ -278,7 +305,10 @@ export const AuthenticationComponent = ({
               <a
                 href={logoutUrl}
                 onClick={onLogout}
-                className="pcgl-auth-dropdown-item ui:block ui:w-full ui:px-4 ui:py-2 ui:text-sm ui:text-black ui:text-left ui:bg-transparent ui:border-none hover:ui:bg-neutral-100 hover:ui:text-pcgl-brand ui:transition-colors focus:ui:outline-2 focus:ui:outline-offset-2 focus-visible:ui:outline-2 focus-visible:ui:outline-offset-2 ui:cursor-pointer ui:box-border"
+                className={headerLinkVariants({
+                  variant: "dropdownItem",
+                  className: "pcgl-auth-dropdown-item",
+                })}
                 role="menuitem"
               >
                 {resolvedLogoutLabel}
@@ -297,7 +327,10 @@ export const AuthenticationComponent = ({
     >
       <a
         href={loginUrl}
-        className="pcgl-auth-login-link ui:inline-flex ui:items-center ui:gap-2 ui:px-3.5 ui:py-2 ui:text-sm ui:font-medium ui:rounded-md ui:no-underline focus:ui:outline-2 focus:ui:outline-offset-2 focus-visible:ui:outline-2  focus-visible:ui:outline-offset-2"
+        className={headerLinkVariants({
+          variant: "outlined",
+          className: "pcgl-auth-login-link",
+        })}
         data-test-id="pcgl-login-link"
       >
         <img

@@ -200,7 +200,7 @@ describe('HeaderContainer', () => {
     render(
       <HeaderContainer
         ref={ref}
-        brand="#FF5500"
+        brandColor="#FF5500"
         aria-label="Site Header"
       />
     );
