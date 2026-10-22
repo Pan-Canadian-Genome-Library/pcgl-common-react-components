@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-blue-1000: #2a8af6;
-  --color-purple-1000: #a853ba;
-  --color-red-1000: #e92a67;
+  /* TODO: PCGL Theme Tokens */
+  --color-pcgl-deep-blue: #054a74;
+  --color-pcgl-pansy-purple: #761248;
+  --color-pcgl-cool-gray: #929497;
+  --color-pcgl-red: #EC1C24;
+ 
 }
