@@ -10,5 +10,5 @@
 
 > 📝 Additional notes 
 
-<!-- 💡 TIP: Screenshots if needed -->.
+<!-- 💡 TIP: Screenshots if needed -->
 
