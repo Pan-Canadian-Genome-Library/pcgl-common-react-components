@@ -6,12 +6,24 @@ This repo contains the implementation of the common elements across PCGL portals
 We are managing multiple packages in a monorepo, this is why PNPM shines 🪩 ✨.
 
 > [!NOTE] 
-> This repo use `pnpm` 12.x and `node` v24.x Please install `pnpm`  
+> This repo use `pnpm` 12.x and `node` v24.x Please install `pnpm` 
 
 > pnpm 12 only needs Node.js when it is installed from npm; the version installed by the standalone script runs without Node.js.
 
 > [!IMPORTANT]
 > Remember Where you are! `pwd` You are in a monorepo and thats matter because you have different pieces of software in the same project. 
+
+**install the turbo command**
+```sh
+pnpm dlx create-turbo@latest
+```
+> The [turbo repo docs](https://turborepo.dev/docs/getting-started/installation) for reference.
+
+**Run the devtools**
+```sh
+turbo devtools
+```
+If everything works you should navigate in the folder structure.
 
 ### Folders structure
 
