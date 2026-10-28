@@ -64,7 +64,7 @@ const t = (s: string) => {
       },
     },
   };
-  const value = s.split(".").reduce((obj, key) => obj?.[key], labels);
+  const value = s.split(".").reduce((obj: any, key) => obj?.[key], labels);
   return value;
 };
 
@@ -109,12 +109,12 @@ const BentoBand = () => {
         </li>
       </ul>
       <p className="legal">
-        {t("footer.bento.licensed_under")}{" "}
+        {t("footer.bento.licensed_under")}
         <LinkItem href="https://github.com/bento-platform/bento_public/blob/main/LICENSE">
           LGPLv3
         </LinkItem>
         {". "}
-        {t("footer.bento.source_available")}{" "}
+        {t("footer.bento.source_available")}
         <LinkItem href="https://github.com/bento-platform">Github</LinkItem>.
       </p>
       <p className="c3g">

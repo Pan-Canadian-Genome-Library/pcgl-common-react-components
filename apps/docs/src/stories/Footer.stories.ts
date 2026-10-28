@@ -63,9 +63,9 @@ export const PCGLResearchPortal: Story = {
             subscribe: "https://genomelibrary.ca/subscribe",
             linkedin: "https://www.linkedin.com/company/genome-library",
           },
-        },
+        } ,
       };
-      const value = s.split(".").reduce((obj, key) => obj?.[key], labels);
+      const value = s.split(".").reduce((obj: any, key) => obj?.[key], labels);
       return value;
     },
     footerItems: [
