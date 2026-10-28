@@ -1,4 +1,4 @@
-import { FooterContainer } from '@repo/ui/footer'
+import Footer from './components/Footer';
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
@@ -24,7 +24,7 @@ function App() {
       <div className="ticks"></div>
 
       <section id="footer-example">
-        <FooterContainer translator={(s) => s}/>
+        <Footer />
       </section>
 
       <div className="ticks"></div>

@@ -47,7 +47,7 @@ export const FooterContainer = ({ ContextualBand, PortalBand, brand='#054A74', t
   );
 };
 
-const LinkItem = ({ children, href, target, ...props }: LinkItemProps) => {
+export const LinkItem = ({ children, href, target, ...props }: LinkItemProps) => {
   const isExternal = href?.startsWith('http');
   const linkTarget = target ?? (isExternal ? '_blank' : undefined);
   return (
