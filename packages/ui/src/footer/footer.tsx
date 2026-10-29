@@ -17,7 +17,7 @@ interface CustomStyles extends CSSProperties {
   '--brand-color'?: string;
 }
 
-export const FooterContainer = ({ ContextualBand, PortalBand, brand='#054A74', translator, footerItems=FOOTER_DATA, ...props }: FooterProps) => {
+export const FooterContainer = ({ ContextualBand, PortalBand, brand='#054A74', translator, footerItems=FOOTER_DATA, className='', ...props }: FooterProps) => {
   const {ref, style} = props;
   const footerStyle: CustomStyles = {
     '--brand-color': brand,
@@ -32,7 +32,7 @@ export const FooterContainer = ({ ContextualBand, PortalBand, brand='#054A74', t
   }));
 
   return (
-    <footer data-test-id="pcgl-footer" className="pcgl-footer" data-brand-color={brand} style={{...footerStyle, ...style}} ref={ref}>
+    <footer data-test-id="pcgl-footer" className={`pcgl-footer ${className}`} data-brand-color={brand} style={{...footerStyle, ...style}} ref={ref}>
       <>{ ContextualBand }</>
       <div className="main-band">
         <FooterView sections={data} />
