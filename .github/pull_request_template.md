@@ -7,6 +7,8 @@
 - [ ] `/packages/ui` (web components)
 - [ ] `/packages/*-config` (shared rules)
 - [ ] Applications (`/apps`)
+- [ ] Workflows ( Github workflows`)
+
 
 > 📝 Additional notes 
 

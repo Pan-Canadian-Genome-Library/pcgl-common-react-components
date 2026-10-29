@@ -49,7 +49,9 @@
       color: (var(--contrast-color));
 
       img {
-        filter: drop-shadow(var(--contrast-color) 1px 1px 4px);
+        border-radius: 1px;
+        outline: 2px solid var(--contrast-color);
+        outline-offset: 2px;
       }
     }
 
@@ -81,7 +83,7 @@
   .contextual-logos,
   .meta-logo {
     height: auto;
-    max-width: 192px;
+    max-width: 240px;
     width: 100%;
   }
 }
