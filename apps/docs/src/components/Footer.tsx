@@ -58,7 +58,7 @@ const t = (s: string) => {
           "https://pan-canadian-genome-library.github.io/researcher/publications-policies",
         helpGuides:
           "https://pan-canadian-genome-library.github.io/researcher/docs",
-        contact: "https://www.genomelibrary.ca/contact-us",
+        contact: "https://genomelibrary.ca/contact-us",
         subscribe: "https://genomelibrary.ca/subscribe",
         linkedin: "https://www.linkedin.com/company/genome-library",
       },
