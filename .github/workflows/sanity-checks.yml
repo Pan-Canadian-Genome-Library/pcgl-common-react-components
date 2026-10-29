@@ -1,0 +1,51 @@
+name: Sanity check
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  filter-checks:
+    name: Sanity check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.9.1
+          run_install: false
+
+      - name: Setup Node.js 24.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Sanity Checks
+      - name: Sanity Check - Linting
+        run: pnpm --filter @repo/ui lint
+
+      - name: Sanity Check - Unit Tests
+        run: pnpm --filter @repo/ui test
+
+      - name: Sanity Check - Typecheck & Bundling
+        run: pnpm --filter @repo/ui build
+
+      - name: Sanity Check - Storybook
+        run: pnpm --filter docs build-storybook
+
