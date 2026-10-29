@@ -8,7 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo run build --filter=docs^... && changeset publish",
+    "release": "turbo run build --filter @repo/ui && changeset publish",
     "storybook": "pnpm --filter docs storybook",
     "test:ui": "vitest run",
     "test:ui:watch": "vitest --watch"
@@ -22,5 +22,8 @@
     "vitest": "^5.0.4"
   },
   "packageManager": "pnpm@12.9.1",
-  "name": "research-portal-components"
+  "name": "research-portal-components",
+  "publishConfig": {
+    "name": "@pcgl-components/ui"
+  }
 }
