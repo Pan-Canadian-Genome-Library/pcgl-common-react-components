@@ -1,32 +1,42 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
+  "agentGuidance": true,
   "tasks": {
     "build": {
+      "description": "Builds each package: tsup bundles plus type declarations for libraries, a Vite production build for apps/docs",
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", "storybook-static/**"],
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build"]
+    },
+    "build-storybook": {
+      "description": "Builds the static Storybook site for apps/docs into storybook-static/",
+      "outputs": ["storybook-static/**"],
       "dependsOn": ["^build"]
     },
     "lint": {
+      "description": "Lints source code: ESLint with the shared @repo/eslint-config for packages, oxlint for apps/docs",
       "dependsOn": ["^lint"]
     },
+    "typecheck": {
+      "description": "Type-checks each package with tsc without emitting output",
+      "dependsOn": ["^build"]
+    },
     "dev": {
+      "description": "Starts watch mode: rebuilds packages on change and serves apps/docs with Vite",
       "cache": false,
       "persistent": true
     },
     "clean": {
-      "cache": false
-    },
-    "preview-storybook": {
-      "dependsOn": [
-        "^build"
-      ],
+      "description": "Deletes build output, the .turbo cache and node_modules in each package",
       "cache": false
     },
     "test": {
+      "description": "Runs the Vitest unit test suite once",
       "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/vitest.config.ts"],
       "dependsOn": ["^test", "@repo/vitest-config#build"]
     },
     "test:watch": {
+      "description": "Runs Vitest in watch mode, re-running tests on change",
       "cache": false,
       "persistent": true
     }

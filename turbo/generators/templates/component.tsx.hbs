@@ -1,0 +1,13 @@
+import type { ComponentPropsWithRef } from 'react';
+
+export interface {{pascalCase name}}Props extends ComponentPropsWithRef<'div'> {
+  label?: string;
+}
+
+export const {{pascalCase name}} = ({ label = '{{pascalCase name}}', className = '', ...props }: {{pascalCase name}}Props) => {
+  return (
+    <div className={`pcgl-{{kebabCase name}} ${className}`.trim()} {...props}>
+      <span>{label}</span>
+    </div>
+  );
+};

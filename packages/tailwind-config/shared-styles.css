@@ -1,10 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* TODO: PCGL Theme Tokens */
   --color-pcgl-deep-blue: #054a74;
   --color-pcgl-pansy-purple: #761248;
   --color-pcgl-cool-gray: #929497;
-  --color-pcgl-red: #EC1C24;
-
+  --color-pcgl-red: #ec1c24;
 }

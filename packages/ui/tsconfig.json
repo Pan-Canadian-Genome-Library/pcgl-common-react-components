@@ -6,11 +6,5 @@
     "strictNullChecks": true
   },
   "include": ["src"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/**/tests",
-    "src/**/*.test.*",
-    "src/**/*.stories.*"
-  ]
+  "exclude": ["node_modules", "dist", "src/**/tests", "src/**/*.test.*", "src/**/*.stories.*"]
 }

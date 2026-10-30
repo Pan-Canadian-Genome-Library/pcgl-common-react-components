@@ -1,0 +1,16 @@
+import '@testing-library/jest-dom/vitest';
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import { {{pascalCase name}} } from '../{{kebabCase name}}';
+
+describe('{{pascalCase name}}', () => {
+  it('renders the default label', () => {
+    render(<{{pascalCase name}} />);
+    expect(screen.getByText('{{pascalCase name}}')).toBeInTheDocument();
+  });
+
+  it('merges a custom className', () => {
+    const { container } = render(<{{pascalCase name}} className="custom" />);
+    expect(container.firstChild).toHaveClass('pcgl-{{kebabCase name}}', 'custom');
+  });
+});
