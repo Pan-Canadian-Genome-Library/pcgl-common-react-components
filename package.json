@@ -1,14 +1,16 @@
 {
   "private": true,
+  "license": "LGPL-3.0-only",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "clean": "turbo run clean && rm -rf node_modules",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"{apps,packages,turbo}/**/*.{ts,tsx,js,mjs,cjs,json,css,md}\" \"*.{json,md}\"",
+    "format:check": "prettier --check \"{apps,packages,turbo}/**/*.{ts,tsx,js,mjs,cjs,json,css,md}\" \"*.{json,md}\"",
+    "typecheck": "turbo run typecheck",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo run build --filter=docs^... && changeset publish",
     "storybook": "pnpm --filter docs storybook",
     "test:ui": "vitest run",
     "test:ui:watch": "vitest --watch"

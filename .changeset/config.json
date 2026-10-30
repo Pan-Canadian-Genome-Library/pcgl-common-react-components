@@ -4,9 +4,8 @@
   "commit": false,
   "fixed": [],
   "linked": [],
-  "access": "public",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "@repo/docs"
+    "docs"
   ]
 }

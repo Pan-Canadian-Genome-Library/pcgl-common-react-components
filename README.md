@@ -1,133 +1,140 @@
-# Portal components
+# PCGL Portal Components
 
-This repo contains the implementation of the common elements across PCGL portals and other shared resources.
+Shared React components and configuration for the Pan-Canadian Genome Library (PCGL) portals, managed as a [pnpm](https://pnpm.io) + [Turborepo](https://turborepo.dev) monorepo.
 
-## Using this Repo
-We are managing multiple packages in a monorepo, this is why PNPM shines 🪩 ✨.
+## Requirements
 
-> [!NOTE] 
-> This repo use `pnpm` 12.x and `node` v24.x Please install `pnpm` 
-
-> pnpm 12 only needs Node.js when it is installed from npm; the version installed by the standalone script runs without Node.js.
+- **Node.js**: the version in [`.nvmrc`](./.nvmrc) (`nvm use` or `fnm use`).
+- **pnpm**: the version in the `packageManager` field of [`package.json`](./package.json). Run `corepack enable` to get it automatically.
 
 > [!IMPORTANT]
-> Remember Where you are! `pwd` You are in a monorepo and thats matter because you have different pieces of software in the same project. 
+> Run every command from the repository root unless stated otherwise. This is a monorepo, so the same command can mean different things inside a package folder.
 
-**install the turbo command**
+## Getting started
+
 ```sh
-pnpm dlx create-turbo@latest
+pnpm install
+pnpm dev         # Vite demo app at http://localhost:5173
+pnpm storybook   # Storybook at http://localhost:6006
 ```
-> The [turbo repo docs](https://turborepo.dev/docs/getting-started/installation) for reference.
 
-**Run the devtools**
-```sh
-turbo devtools
+`turbo` is installed as a dev dependency, so run it through pnpm: `pnpm turbo <command>`. To explore the repository visually, run `pnpm turbo devtools`.
+
+## Repository structure
+
 ```
-If everything works you should navigate in the folder structure.
-
-### Folders structure
-
-```bash
 apps/
-└── docs/              <-- Demo app for development, testing and documentation.
+└── docs/                <-- Vite demo app and Storybook for the components
 packages/
-├── eslint-config/     <-- Shared eslint config.
-├── typescript-config/ <-- Shared typescript config.
-├── vitest-config/     <-- Shared vitest config.
-└── ui/                <-- Root folder for all the components.
-    ├── src/footer     <-- Example of a component.
-    └── ...   
+├── ui/                  <-- @repo/ui, the component library
+│   └── src/footer/      <-- one folder per component
+├── eslint-config/       <-- shared ESLint config
+├── typescript-config/   <-- shared tsconfig files
+├── vitest-config/       <-- shared Vitest config
+└── tailwind-config/     <-- shared Tailwind styles and PostCSS config
+turbo/generators/        <-- the shared-component generator
 ```
-We always suppose you are in the root of the project 🫚.
 
-### Useful Commands
+## Commands
 
-Fell free to explore the different commands locating the script section in each `package.json` the following commands 
+| Command                          | What it does                                                        |
+| -------------------------------- | ------------------------------------------------------------------- |
+| `pnpm dev`                       | Watches packages and serves the demo app                            |
+| `pnpm storybook`                 | Runs Storybook with hot reloading                                   |
+| `pnpm build`                     | Builds every package (`packages/ui/dist`, `apps/docs/dist`)         |
+| `pnpm turbo run build-storybook` | Builds the static Storybook site into `apps/docs/storybook-static`  |
+| `pnpm lint`                      | Lints every package                                                 |
+| `pnpm typecheck`                 | Type-checks every package                                           |
+| `pnpm test:ui`                   | Runs the unit tests (`pnpm test:ui:watch` for watch mode)           |
+| `pnpm format`                    | Formats the code with Prettier (`pnpm format:check` to verify only) |
+| `pnpm changeset`                 | Records a change for the next release                               |
+| `pnpm clean`                     | Deletes `dist`, `.turbo` and `node_modules` in every package        |
 
-- `pnpm install` - Install the dependencies for all packages.
+Every task's purpose is also described in [`turbo.json`](./turbo.json).
+
+## Creating a component
+
+Use the `shared-component` generator rather than creating files by hand:
+
+```sh
+pnpm turbo gen shared-component              # asks for the name
+pnpm turbo gen shared-component --args "user card"
+```
+
+For `user card` it creates:
+
+```
+packages/ui/src/user-card/user-card.tsx              <-- UserCard component and UserCardProps
+packages/ui/src/user-card/index.ts                   <-- makes @repo/ui/user-card importable
+packages/ui/src/user-card/tests/user-card.test.tsx   <-- starter tests
+apps/docs/src/stories/UserCard.stories.ts            <-- Storybook story under PCGL/UserCard
+```
+
+It also adds the component to `packages/ui/src/index.ts` and formats the new files. The generator stops if the component already exists. Its configuration and templates live in [`turbo/generators`](./turbo/generators).
+
+## Code style
+
+Naming, formatting, component structure and Turborepo conventions are documented in [CONTRIBUTING.md](./CONTRIBUTING.md). They are enforced by Prettier, ESLint and CI.
+
+## Continuous integration
+
+| Workflow                                                     | Runs on            | What it does                                                                    |
+| ------------------------------------------------------------ | ------------------ | ------------------------------------------------------------------------------- |
+| [CI](./.github/workflows/ci.yml)                             | Every pull request | Format check, then lint, typecheck, test, build and Storybook for every package |
+| [Release](./.github/workflows/release.yml)                   | Push to `main`     | Runs CI, then opens the Version Packages PR or creates the release              |
+| [Deploy Storybook](./.github/workflows/deploy-storybook.yml) | Push to `main`     | Publishes Storybook to GitHub Pages                                             |
+
+### Testing workflows locally with act
+
+[act](https://nektosact.com) runs the workflows in Docker on your machine. Install it with `brew install act` (Docker must be running). The committed [`.actrc`](./.actrc) selects the runner image, which is a large download on the first run.
+
+```sh
+act -l                                                # list workflows, jobs and events
+act pull_request -W .github/workflows/ci.yml -n       # dry run (-n) validates without executing
+act pull_request -W .github/workflows/ci.yml          # full CI run
+act push -W .github/workflows/release.yml             # CI + build and pack @repo/ui
+act push -W .github/workflows/deploy-storybook.yml    # build Storybook
+```
 
 > [!NOTE]
-> If you are not familiar with `storybook` use the `dev` command.
+> Steps that write to GitHub (artifacts, the Version Packages PR, tags, releases and Pages deployments) are skipped under act through `if: ${{ !env.ACT }}`. No GitHub token is needed, so don't pass one.
 
-> `pnpm dev`
+> [!TIP]
+> On Apple Silicon, don't add `--container-architecture linux/amd64`. The image's `PATH` points to its arm64 Node.js, so actions fail with `node: executable file not found`.
 
-- `pnpm storybook` - Run all packages locally and preview with Storybook with hot reloading at `localhost:6006`
-- `pnpm dev` - Run all packages locally and preview with Vite App at `localhost:5173`
-- `pnpm lint` - Lint all packages
-- `pnpm build` - Build all packages, including the Storybook site
-- `pnpm changeset` - Generate a changeset
-- `pnpm clean` - Clean up all `node_modules` and `dist` folders (runs each package's clean script)
-- `pnpm test:ui` - Execute the unit test
+## Releasing
 
+`@repo/ui` is released as a tarball attached to a GitHub Release. It isn't published to npm, because `@repo` is an [unclaimable npm scope](https://turborepo.dev/docs/crafting-your-repository/structuring-a-repository).
 
-## Apps & Packages
+1. Every pull request that changes `@repo/ui` for consumers includes a changeset (`pnpm changeset`).
+2. When it merges, the Release workflow opens or updates a **Version Packages** pull request that bumps the version and updates `packages/ui/CHANGELOG.md`.
+3. When the Version Packages PR merges, the workflow tags `@repo/ui@<version>` and creates a GitHub Release with the changelog notes and the `repo-ui-<version>.tgz` tarball.
 
-This Turborepo includes the following packages and applications:
+### Installing `@repo/ui`
 
-- `apps/docs`: Component documentation site with Storybook
-- `packages/ui`: Core React components
-- `packages/typescript-config`: Shared `tsconfig.json`s used throughout the Turborepo
-- `packages/eslint-config`: ESLint preset
-- `packages/vitest-config`: vitest shared config
+Copy the `.tgz` link from the [Releases page](https://github.com/Pan-Canadian-Genome-Library/pcgl-common-react-components/releases) and install it:
 
-
-### Compilation
-
-Run `pnpm build` to confirm compilation is working correctly. You should see a folder `ui/dist` which contains some of the compiled output.
-
-**e.g.**
-```bash
-ui
-└── dist
-    ├── footer.d.ts  <-- Types
-    ├── footer.js    <-- CommonJS version
-    ├── footer.mjs   <-- ES Modules version
-    └── footer.d.mts   <-- ES Modules version with Types
+```sh
+pnpm add <tarball-url>
 ```
 
-## Components 🏗️ 🧱
+```tsx
+import { FooterContainer } from '@repo/ui/footer';
+```
 
-Each file inside of `ui/src` is a component inside our design system (Internal PCGL *documentation*).
+## AI assistants
 
+Instructions for AI coding agents live in a single tool-agnostic file, [`AGENTS.md`](./AGENTS.md). `CLAUDE.md` and `GEMINI.md` only import it; other agents (Codex, Cursor, GitHub Copilot and more) read `AGENTS.md` directly.
 
-## Versioning & Publishing Packages
+The end of `AGENTS.md` contains a block that `turbo` maintains (`"agentGuidance": true` in `turbo.json`). It points agents to the documentation bundled with the installed `turbo` version, so they don't rely on outdated training data. Don't edit that block, and commit it when `turbo` updates it.
 
-This example uses [Changesets](https://github.com/changesets/changesets) to manage versions, create changelogs, and publish to npm. It's preconfigured so you can start publishing packages immediately.
+## License
 
-You'll need to create an `NPM_TOKEN` and `GITHUB_TOKEN` and add it to your GitHub repository settings to enable access to npm. It's also worth installing the [Changesets bot](https://github.com/apps/changeset-bot) on your repository.
+This project is licensed under the [GNU Lesser General Public License v3.0](./LICENSE) (`LGPL-3.0-only`). The `LICENSE` file contains the LGPL-3.0 terms followed by the GNU GPL-3.0 they supplement.
 
-### Generating the Changelog
+> [!NOTE]
+> `@repo/ui` versions `0.0.3` and earlier were released under the MIT license and remain available under those terms. The LGPL-3.0 applies from the next release onward.
 
-To generate your changelog, run `pnpm changeset` locally:
+## Acknowledgements
 
-1. **Which packages would you like to include?** – This shows which packages and changed and which have remained the same. By default, no packages are included. Press `space` to select the packages you want to include in the `changeset`.
-1. **Which packages should have a major bump?** – Press `space` to select the packages you want to bump versions for.
-1. If doing the first major version, confirm you want to release.
-1. Write a summary for the changes.
-1. Confirm the changeset looks as expected.
-1. A new Markdown file will be created in the `changeset` folder with the summary and a list of the packages included.
-
-### Releasing
-
-[Github docs about releasing ](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases#about-releases)
-
-
-# About Turborepo Design System Starter
-
-This is a [community-maintained example](https://github.com/Selleo/design-system/blob/main/README.md).
-
-The main tools are:
-
-- 🏎 [Turborepo](https://turborepo.dev) — High-performance build system for Monorepos
-- 🚀 [React](https://reactjs.org/) — JavaScript library for user interfaces
-- 🛠 [Tsup](https://github.com/egoist/tsup) — TypeScript bundler powered by esbuild
-- 📖 [Storybook](https://storybook.js.org/) — UI component environment powered by Vite
-
-As well as a few others tools preconfigured:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-- [Changesets](https://github.com/changesets/changesets) for managing versioning and changelogs
-- [GitHub Actions](https://github.com/changesets/action) for fully automated package publishing
-- [Vitest](https://vercel.com/academy/production-monorepos/set-up-vitest) for fully understanding the testing
+This repository started from the community-maintained [Turborepo design system starter](https://github.com/Selleo/design-system/blob/main/README.md).

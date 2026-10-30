@@ -1,0 +1,17 @@
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { {{pascalCase name}}, type {{pascalCase name}}Props } from '@repo/ui/{{kebabCase name}}';
+
+const meta = {
+  title: 'PCGL/{{pascalCase name}}',
+  component: {{pascalCase name}},
+  tags: ['autodocs'],
+} satisfies Meta<{{pascalCase name}}Props>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    label: 'My custom {{pascalCase name}}',
+  },
+};

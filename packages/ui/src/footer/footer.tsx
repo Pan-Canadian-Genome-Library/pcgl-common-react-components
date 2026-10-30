@@ -10,18 +10,26 @@ export interface FooterProps extends ComponentPropsWithRef<'footer'> {
   ContextualBand?: React.ReactNode;
   PortalBand?: React.ReactNode;
   brand?: string;
-  translator: (s:string) => string;
-  footerItems?: FooterNavItems[]
-};
+  translator: (s: string) => string;
+  footerItems?: FooterNavItems[];
+}
 interface CustomStyles extends CSSProperties {
   '--brand-color'?: string;
 }
 
-export const FooterContainer = ({ ContextualBand, PortalBand, brand='#054A74', translator, footerItems=FOOTER_DATA, className='', ...props }: FooterProps) => {
-  const {ref, style} = props;
+export const FooterContainer = ({
+  ContextualBand,
+  PortalBand,
+  brand = '#054A74',
+  translator,
+  footerItems = FOOTER_DATA,
+  className = '',
+  ...props
+}: FooterProps) => {
+  const { ref, style } = props;
   const footerStyle: CustomStyles = {
     '--brand-color': brand,
-  }
+  };
 
   const data = Array.from(footerItems, (link) => ({
     title: translator(`footer.section.${link.title}`),
@@ -32,17 +40,30 @@ export const FooterContainer = ({ ContextualBand, PortalBand, brand='#054A74', t
   }));
 
   return (
-    <footer data-test-id="pcgl-footer" className={`pcgl-footer ${className}`} data-brand-color={brand} style={{...footerStyle, ...style}} ref={ref}>
-      <>{ ContextualBand }</>
+    <footer
+      data-test-id="pcgl-footer"
+      className={`pcgl-footer ${className}`}
+      data-brand-color={brand}
+      style={{ ...footerStyle, ...style }}
+      ref={ref}
+    >
+      <>{ContextualBand}</>
       <div className="main-band">
         <FooterView sections={data} />
         <div className="meta">
           <LinkHeader>{translator('footer.meta.fundingTitle')}</LinkHeader>
-          <img className="meta-logo" src={fundersLogo} role="presentation" alt="" width={423} height={95} />
+          <img
+            className="meta-logo"
+            src={fundersLogo}
+            role="presentation"
+            alt=""
+            width={423}
+            height={95}
+          />
           <p>{translator('footer.meta.cihrSupport')}</p>
         </div>
       </div>
-      <>{ PortalBand }</>
+      <>{PortalBand}</>
     </footer>
   );
 };
@@ -63,7 +84,9 @@ export const LinkItem = ({ children, href, target, ...props }: LinkItemProps) =>
   );
 };
 
-const LinkHeader = ({ children }: { children: React.ReactNode }) => <h3 className="title">{children}</h3>;
+const LinkHeader = ({ children }: { children: React.ReactNode }) => (
+  <h3 className="title">{children}</h3>
+);
 
 const FooterView = ({ sections }: { sections: FooterNavItems[] }) => {
   return (
