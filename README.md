@@ -118,8 +118,38 @@ Copy the `.tgz` link from the [Releases page](https://github.com/Pan-Canadian-Ge
 pnpm add <tarball-url>
 ```
 
+```sh
+npm install <tarball-url>
+```
+
+**A example about how to use it**
+
+`package.json`
+```json
+{
+  "dependencies": {
+    "@pcgl-components/ui": "https://github.com/Pan-Canadian-Genome-Library/pcgl-common-react-components/releases/download/v0.0.2/repo-ui-0.0.3.tgz",
+  }
+}
+```
+
+`src/js/components/Pcgl/PcglFooter.tsx`
 ```tsx
 import { FooterContainer } from '@repo/ui/footer';
+
+const BentoBand = () => {<>{/* My site Footer */}<> };
+
+export const Footer = () => {
+  const t = useTranslationFn();
+
+  return (
+    <FooterContainer
+      className="pcgl-layout-wrap" /* My site styles */
+      translator={t}
+      PortalBand={<BentoBand />} 
+    />
+  );
+}; 
 ```
 
 ## AI assistants
