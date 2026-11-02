@@ -112,10 +112,10 @@ code {
   column-gap: 24px;
   display: grid;
   grid-template-areas:
-    "about"
-    "links"
-    "legal"
-    "c3g";
+    'about'
+    'links'
+    'legal'
+    'c3g';
   grid-template-columns: 1fr;
   row-gap: 16px;
   color: #d9d9d9;
@@ -176,8 +176,8 @@ code {
   .bento-footer {
     column-gap: 96px;
     grid-template-areas:
-      "about links"
-      "legal c3g";
+      'about links'
+      'legal c3g';
     grid-template-columns: 1fr auto;
   }
 

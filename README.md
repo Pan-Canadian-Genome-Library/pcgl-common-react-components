@@ -125,15 +125,17 @@ npm install <tarball-url>
 **A example about how to use it**
 
 `package.json`
+
 ```json
 {
   "dependencies": {
-    "@pcgl-components/ui": "https://github.com/Pan-Canadian-Genome-Library/pcgl-common-react-components/releases/download/v0.0.2/repo-ui-0.0.3.tgz",
+    "@pcgl-components/ui": "https://github.com/Pan-Canadian-Genome-Library/pcgl-common-react-components/releases/download/v0.0.2/repo-ui-0.0.3.tgz"
   }
 }
 ```
 
 `src/js/components/Pcgl/PcglFooter.tsx`
+
 ```tsx
 import { FooterContainer } from '@repo/ui/footer';
 
@@ -146,10 +148,10 @@ export const Footer = () => {
     <FooterContainer
       className="pcgl-layout-wrap" /* My site styles */
       translator={t}
-      PortalBand={<BentoBand />} 
+      PortalBand={<BentoBand />}
     />
   );
-}; 
+};
 ```
 
 ## AI assistants
