@@ -1,7 +1,7 @@
 @property --brand-color {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: false;
-  initial-value: #054A74;
+  initial-value: #054a74;
 }
 
 :where(.pcgl-footer) {
@@ -9,10 +9,12 @@
   --contrast-color: contrast-color(var(--brand-color));
   --contrast-color-p: color-mix(in srgb, var(--contrast-color), black 10%);
   --contrast-color-link: color-mix(in srgb, var(--contrast-color), black 15%);
-  
+
   background-color: var(--brand-color);
   color: var(--contrast-color);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 
   text-align: start;
   padding: 24px;
@@ -55,14 +57,14 @@
       }
     }
 
-    &[href^="http"]::after {
+    &[href^='http']::after {
       color: currentColor;
-      content: "↗" / "";
+      content: '↗' / '';
     }
 
-    &[href^="http"][href*="sd4h"]::after ,
-    &[href^="http"][href*="genomelibrary"]::after,
-    &[href^="http"]:has(> img)::after {
+    &[href^='http'][href*='sd4h']::after,
+    &[href^='http'][href*='genomelibrary']::after,
+    &[href^='http']:has(> img)::after {
       content: none;
     }
   }
@@ -93,8 +95,8 @@
   column-gap: 16px;
   display: grid;
   grid-template-areas:
-    "section"
-    "meta";
+    'section'
+    'meta';
   grid-template-columns: 1fr;
   padding: 24px 0;
   row-gap: 24px;
@@ -133,9 +135,9 @@
 @container (width > 480px) {
   .main-band {
     grid-template-areas:
-      "section section"
-      "section section"
-      "meta meta";
+      'section section'
+      'section section'
+      'meta meta';
     grid-template-columns: 1fr 1fr;
 
     .meta {
@@ -147,8 +149,8 @@
 @container (width > 640px) {
   .main-band {
     grid-template-areas:
-      "section section section"
-      "meta meta meta";
+      'section section section'
+      'meta meta meta';
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
@@ -163,8 +165,7 @@
 
 @container (width > 1440px) {
   .main-band {
-    grid-template-areas:
-      "section section section meta";
+    grid-template-areas: 'section section section meta';
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
     .meta {

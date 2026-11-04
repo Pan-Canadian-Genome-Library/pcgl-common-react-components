@@ -22,36 +22,33 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v7
 
+      # Versions come from package.json (packageManager) and .nvmrc.
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 12.9.1
-          run_install: false
+        uses: pnpm/action-setup@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 24
-          cache: 'pnpm'
+          node-version-file: .nvmrc
+          cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build UI Package
-        run: pnpm --filter @repo/ui build
-
+      # build-storybook depends on ^build, so turbo builds @repo/ui first.
       - name: Build Storybook
-        run: pnpm --filter docs build-storybook
+        run: pnpm turbo run build-storybook --filter=docs
 
+      # Skipped when testing locally with act; these publish to GitHub Pages.
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        if: ${{ !env.ACT }}
+        uses: actions/upload-pages-artifact@v5
         with:
           path: 'apps/docs/storybook-static'
 
       - id: deploy
         name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+        if: ${{ !env.ACT }}
+        uses: actions/deploy-pages@v5

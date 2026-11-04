@@ -51,7 +51,7 @@ describe('FooterContainer', () => {
         ContextualBand={<div data-test-id="context-band">Context</div>}
         PortalBand={<div data-test-id="portal-band">Portal</div>}
         footerItems={[]}
-      />
+      />,
     );
 
     expect(screen.getByTestId('context-band')).toBeInTheDocument();
