@@ -51,7 +51,9 @@ export const FooterContainer = ({
       <div className="main-band">
         <FooterView sections={data} />
         <div className="meta">
-          <LinkHeader>{translator('footer.meta.fundingTitle')}</LinkHeader>
+          <p>
+            <b>{translator('footer.meta.fundingTitle')}</b>
+          </p>
           <img
             className="meta-logo"
             src={fundersLogo}
@@ -83,10 +85,6 @@ export const LinkItem = ({ children, href, target, ...props }: LinkItemProps) =>
     </a>
   );
 };
-
-const LinkHeader = ({ children }: { children: React.ReactNode }) => (
-  <h3 className="title">{children}</h3>
-);
 
 const FooterView = ({ sections }: { sections: FooterNavItems[] }) => {
   return (

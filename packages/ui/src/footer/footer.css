@@ -30,11 +30,6 @@
     margin: 0;
   }
 
-  & h3 {
-    margin: 0;
-    font-size: 14px;
-  }
-
   .focus-ring:focus,
   .focus-ring:focus-visible {
     border-radius: 1px;
