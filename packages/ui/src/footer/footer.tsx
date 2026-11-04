@@ -51,7 +51,9 @@ export const FooterContainer = ({
       <div className="main-band">
         <FooterView sections={data} />
         <div className="meta">
-          <p><b>{translator('footer.meta.fundingTitle')}</b></p>
+          <p>
+            <b>{translator('footer.meta.fundingTitle')}</b>
+          </p>
           <img
             className="meta-logo"
             src={fundersLogo}
