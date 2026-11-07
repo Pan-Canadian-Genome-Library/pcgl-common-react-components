@@ -46,6 +46,7 @@ export const FooterContainer = ({
       data-brand-color={brand}
       style={{ ...footerStyle, ...style }}
       ref={ref}
+      {...props}
     >
       <>{ContextualBand}</>
       <div className="main-band">
