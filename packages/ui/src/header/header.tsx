@@ -86,6 +86,7 @@ export const Header = ({
 }: HeaderProps) => {
   const [panelOpen, setPanelOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
 
   const closePanel = useCallback(() => setPanelOpen(false), []);
@@ -96,14 +97,24 @@ export const Header = ({
 
   useEffect(() => {
     if (!panelOpen) return;
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node;
+      // The toggle handles its own click; skipping it avoids closing and immediately reopening.
+      if (panelRef.current?.contains(target) || toggleRef.current?.contains(target)) return;
+      setPanelOpen(false);
+    };
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setPanelOpen(false);
         toggleRef.current?.focus();
       }
     };
+    document.addEventListener('pointerdown', onPointerDown);
     document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
   }, [panelOpen]);
 
   const navItems = flatten(nav);
@@ -191,6 +202,7 @@ export const Header = ({
 
         {hasPanel ? (
           <div
+            ref={panelRef}
             id={panelId}
             hidden={!panelOpen}
             className={cx(

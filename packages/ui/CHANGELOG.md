@@ -1,5 +1,11 @@
 # @repo/ui
 
+## 0.0.0-bulbasaur-20261109204722
+
+### Patch Changes
+
+- Header: the mobile menu panel now closes when you click or tap outside it.
+
 ## 0.0.0-bulbasaur-20261106170408
 
 ### Minor Changes

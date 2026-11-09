@@ -178,6 +178,19 @@ describe('@repo/ui/header', () => {
         expect(toggle).toHaveFocus();
       });
 
+      it('closes on a pointer down outside, but not inside the panel', () => {
+        const { container } = renderHeader();
+        const toggle = screen.getByRole('button', { name: 'Open menu' });
+        fireEvent.click(toggle);
+
+        fireEvent.pointerDown(panel(container));
+        expect(panel(container)).toBeVisible();
+
+        fireEvent.pointerDown(document.body);
+        expect(panel(container)).not.toBeVisible();
+        expect(toggle).toHaveAttribute('aria-expanded', 'false');
+      });
+
       it('closes when a link or button inside it is used', () => {
         const onRegister = vi.fn();
         const { container } = renderHeader({

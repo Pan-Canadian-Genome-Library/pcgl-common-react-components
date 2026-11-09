@@ -15,7 +15,12 @@ const base: SVGProps<SVGSVGElement> = {
 
 export const MenuIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...props}>
-    <path d="M4 6h16M4 12h16M4 18h16" />
+    <circle cx="4" cy="6" r="1" fill="currentColor"></circle>
+    <path d="M9 6h11"></path>
+    <circle cx="4" cy="12" r="1" fill="currentColor"></circle>
+    <path d="M9 12h11"></path>
+    <circle cx="4" cy="18" r="1" fill="currentColor"></circle>
+    <path d="M9 18h11"></path>
   </svg>
 );
 
