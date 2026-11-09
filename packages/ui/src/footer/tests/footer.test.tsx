@@ -65,4 +65,10 @@ describe('FooterContainer', () => {
     expect(ref.current).toBeInstanceOf(HTMLElement);
     expect(ref.current).toHaveAttribute('data-brand-color', '#123456');
   });
+
+  it('applies the id prop to the footer element', () => {
+    render(<FooterContainer id="site-footer" translator={mockTranslator} />);
+
+    expect(screen.getByTestId('pcgl-footer')).toHaveAttribute('id', 'site-footer');
+  });
 });

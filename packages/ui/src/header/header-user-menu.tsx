@@ -77,7 +77,7 @@ export const HeaderUserMenu = ({
           buttonReset,
           focusRing,
           'pcgl:flex pcgl:items-center pcgl:gap-3 pcgl:rounded-md pcgl:border-0 pcgl:bg-transparent pcgl:p-2 pcgl:text-left',
-          'pcgl:text-[color:var(--pcgl-header-text,#000)]',
+          'pcgl:text-[color:var(--pcgl-header-text,#000)] pcgl:focus-visible:outline-[color:var(--pcgl-header-brand,#761248)]',
         )}
       >
         <UserIcon className="pcgl:size-6 pcgl:md:hidden" />
