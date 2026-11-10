@@ -2,6 +2,14 @@
 
 Shared React components and configuration for the Pan-Canadian Genome Library (PCGL) portals, managed as a [pnpm](https://pnpm.io) + [Turborepo](https://turborepo.dev) monorepo.
 
+<a aria-label="license" href="https://github.com/Pan-Canadian-Genome-Library/pcgl-common-react-components/blob/main/LICENSE">
+  <img src="https://img.shields.io/badge/license-LGPL--3.0-blue" alt="">
+</a>
+
+<a aria-label="version" href="https://github.com/Pan-Canadian-Genome-Library/pcgl-common-react-components/actions">
+  <img src="https://img.shields.io/github/v/release/Pan-Canadian-Genome-Library/pcgl-common-react-components" alt="">
+</a>
+
 ## Requirements
 
 - **Node.js**: the version in [`.nvmrc`](./.nvmrc) (`nvm use` or `fnm use`).
