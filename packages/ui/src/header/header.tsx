@@ -15,6 +15,7 @@ import {
 } from 'react';
 import { cx } from 'class-variance-authority';
 import { buttonReset, focusRing, listReset } from '../lib/reset';
+import { dropdownSurface } from './dropdown';
 import { HeaderContext, type HeaderLinkComponent, type HeaderTranslator } from './header-context';
 import { CloseIcon, MenuIcon } from './icons';
 import { SkipLinks, type SkipLinkItem } from './skip-links';
@@ -207,12 +208,15 @@ export const Header = ({
             hidden={!panelOpen}
             className={cx(
               'pcgl-header-panel pcgl:md:hidden',
-              'pcgl:border-t pcgl:border-[color:var(--pcgl-header-border,#929497)] pcgl:px-4 pcgl:py-4',
+              dropdownSurface,
+              'pcgl:inset-x-2',
+              'pcgl:[&_.pcgl-header-nav-link]:flex pcgl:[&_.pcgl-header-nav-link]:px-3 pcgl:[&_.pcgl-header-nav-link]:py-[5px] pcgl:[&_.pcgl-header-nav-link]:leading-[22px]',
+              'pcgl:[&_.pcgl-header-nav-link:hover]:bg-[rgba(0,0,0,0.04)]',
             )}
           >
             {hasNav ? <NavList items={navItems} label={navLabel} className="" /> : null}
             {hasActions ? (
-              <div className="pcgl-header-actions pcgl:mt-2 pcgl:flex pcgl:flex-col pcgl:items-start pcgl:gap-1 pcgl:border-t pcgl:border-[color:var(--pcgl-header-border,#929497)] pcgl:pt-2">
+              <div className="pcgl-header-actions pcgl:mt-1 pcgl:flex pcgl:flex-col pcgl:items-start pcgl:gap-1 pcgl:border-t pcgl:border-[rgba(0,0,0,0.06)] pcgl:px-3 pcgl:pt-1">
                 {actions}
               </div>
             ) : null}

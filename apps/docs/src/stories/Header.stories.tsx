@@ -88,11 +88,12 @@ export const LoggedOut: Story = {
   },
 };
 
+/** An children in HeaderUserMenu: a plain `<a>` with `href`, otherwise a button. */
 export const LoggedIn: Story = {
   args: {
     actions: <HeaderNavLink href="#dashboard">My Applications</HeaderNavLink>,
     account: (
-      <HeaderUserMenu name="Jane Long Name Example" email="j.longname@oicr.on.ca">
+      <HeaderUserMenu name="Brook Lee long Example" email="b.longname@veg.org.ca">
         <HeaderUserMenuItem onClick={() => alert('Logout')}>Logout</HeaderUserMenuItem>
       </HeaderUserMenu>
     ),

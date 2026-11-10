@@ -13,6 +13,7 @@ import {
 } from 'react';
 import { cx } from 'class-variance-authority';
 import { buttonReset, focusRing, listReset } from '../lib/reset';
+import { dropdownItem, dropdownSurface } from './dropdown';
 import { useHeaderContext } from './header-context';
 import { ChevronDownIcon, UserIcon } from './icons';
 
@@ -104,8 +105,8 @@ export const HeaderUserMenu = ({
         className={cx(
           'pcgl-header-user-menu-list',
           listReset,
-          'pcgl:absolute pcgl:top-full pcgl:right-0 pcgl:z-[1001] pcgl:mt-1 pcgl:min-w-40 pcgl:rounded-md pcgl:py-1 pcgl:shadow-lg',
-          'pcgl:border pcgl:border-[color:var(--pcgl-header-border,#929497)] pcgl:bg-[color:var(--pcgl-header-bg,#fff)]',
+          dropdownSurface,
+          'pcgl:right-0 pcgl:min-w-40',
         )}
       >
         {Children.toArray(children).map((child, index) => (
@@ -119,15 +120,14 @@ export const HeaderUserMenu = ({
 const itemClasses = cx(
   'pcgl-header-user-menu-item',
   focusRing,
-  'pcgl:block pcgl:w-full pcgl:px-4 pcgl:py-2 pcgl:text-left pcgl:text-sm pcgl:no-underline',
-  'pcgl:text-[color:var(--pcgl-header-text,#000)] pcgl:hover:bg-neutral-100',
+  dropdownItem,
+  'pcgl:block pcgl:w-full pcgl:text-left pcgl:no-underline pcgl:text-inherit',
 );
 
 export type HeaderUserMenuItemProps =
   | (AnchorHTMLAttributes<HTMLAnchorElement> & { href: string; ref?: Ref<HTMLAnchorElement> })
   | (ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined; ref?: Ref<HTMLButtonElement> });
 
-/** An entry in HeaderUserMenu: a plain `<a>` with `href` (e.g. a logout route), otherwise a button. */
 export const HeaderUserMenuItem = ({ className, children, ...props }: HeaderUserMenuItemProps) => {
   if (props.href !== undefined) {
     const { href, ...anchor } = props as AnchorHTMLAttributes<HTMLAnchorElement>;
