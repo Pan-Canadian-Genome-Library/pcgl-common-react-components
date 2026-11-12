@@ -23,7 +23,7 @@ const translator = (key: string) => messages[key] ?? key;
 
 /** app's resources */
 const Logo = () => (
-  <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 28, lineHeight: 1 }}>
+  <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 28, lineHeight: 1 }} aria-hidden>
     PCGL
     <span style={{ fontSize: 11, lineHeight: 1.1 }}>
       Research
