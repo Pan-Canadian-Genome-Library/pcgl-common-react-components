@@ -23,6 +23,7 @@ import { SkipLinks, type SkipLinkItem } from './skip-links';
 export interface HeaderProps extends ComponentPropsWithRef<'header'> {
   logo: ReactNode;
   logoHref?: string;
+  banner?: ReactNode;
   nav?: ReactNode;
   language?: ReactNode;
   actions?: ReactNode;
@@ -73,6 +74,7 @@ const NavList = ({
 export const Header = ({
   logo,
   logoHref = '/',
+  banner,
   nav,
   language,
   actions,
@@ -148,6 +150,7 @@ export const Header = ({
         )}
       >
         <SkipLinks links={links} />
+        {banner}
         <div className="pcgl-header-bar pcgl:flex pcgl:h-[var(--pcgl-header-height,4rem)] pcgl:items-center pcgl:gap-4 pcgl:px-4 pcgl:md:gap-8 pcgl:md:px-8">
           <Link
             href={logoHref}

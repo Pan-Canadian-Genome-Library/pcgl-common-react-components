@@ -115,6 +115,17 @@ describe('@repo/ui/header', () => {
       );
     });
 
+    it('places the banner slot after the skip links and before the logo in tab order', () => {
+      renderHeader({ banner: <button type="button">Close announcement</button> });
+
+      const skipLink = screen.getByRole('link', { name: 'Skip to main content' });
+      const bannerButton = screen.getByRole('button', { name: 'Close announcement' });
+      const logo = screen.getByRole('link', { name: 'PCGL Research Portal home' });
+
+      expect(skipLink.compareDocumentPosition(bannerButton)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      expect(bannerButton.compareDocumentPosition(logo)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    });
+
     describe('skip links', () => {
       it('renders #main and #footer first by default', () => {
         const { container } = renderHeader();
