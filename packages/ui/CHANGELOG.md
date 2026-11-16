@@ -1,0 +1,15 @@
+# @repo/ui
+
+## 0.1.0
+
+### Minor Changes
+
+- 57dee42: Add the Header component (@repo/ui/header) with skip links, nav links, buttons, language toggle and user menu. Styles ship as @repo/ui/header/styles.css (or @repo/ui/styles.css); import it once before your app's CSS. react and react-dom are now peer dependencies (React 19).
+- a89f592: License changed from MIT to LGPL-3.0-only. Versions 0.0.3 and earlier remain available under MIT.
+
+### Patch Changes
+
+- fd1c905: className prop support
+- 57dee42: Header: the mobile menu panel now closes when you click or tap outside it.
+- 57dee42: Header: the mobile panel and user menu now float over the page as antd-style dropdowns (white background, 8px radius, elevated shadow) instead of inheriting a transparent background. Override the surface colour with --pcgl-header-dropdown-bg.
+- 3395a02: Deleting header from footer component
