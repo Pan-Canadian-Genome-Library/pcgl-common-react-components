@@ -71,6 +71,7 @@ jobs:
         if: ${{ !env.ACT }}
         uses: changesets/action@v2
         with:
+          github-token: ${{ secrets.RELEASE_PR }}
           publish-script: pnpm changeset git-tag
 
       - name: Attach Tarball to GitHub Release
