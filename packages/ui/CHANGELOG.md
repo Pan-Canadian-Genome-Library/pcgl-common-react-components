@@ -1,5 +1,11 @@
 # @repo/ui
 
+## 0.2.0
+
+### Minor Changes
+
+- ba90223: Add Banner component, Announcement type and defaultAnnouncements; add a banner slot to Header; add status colour Role Tokens
+
 ## 0.1.0
 
 ### Minor Changes
