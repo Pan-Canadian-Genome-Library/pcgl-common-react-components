@@ -125,7 +125,7 @@ describe('shared Role Tokens', () => {
       colorWarningBg: '#fffbe6',
       colorWarningBorder: '#ffe58f',
       colorError: '#ff4d4f',
-      colorErrorBg: '#fff2f0',
+      colorErrorBg: '#fff1f0',
       colorErrorBorder: '#ffccc7',
     });
   });

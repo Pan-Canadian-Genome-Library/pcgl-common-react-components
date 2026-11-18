@@ -45,7 +45,7 @@ export const sharedColors = {
   colorPrimaryBgHover: brandPalette.coolGray.tints[3],
 
   /* Status colours. */
-  colorSuccess: '#52c41a', // Success Contrast Ratio fails on white.
+  colorSuccess: '#52c41a',
   colorSuccessHover: '#95de64',
   colorSuccessActive: '#389e0d',
   colorSuccessBg: '#f6ffed',
@@ -55,15 +55,15 @@ export const sharedColors = {
   colorInfoActive: '#0958d9',
   colorInfoBg: '#e6f4ff',
   colorInfoBorder: '#91caff',
-  colorWarning: '#faad14', // Warning Contrast Ratio fails on white.
+  colorWarning: '#faad14',
   colorWarningHover: '#ffd666',
   colorWarningActive: '#d48806',
   colorWarningBg: '#fffbe6',
   colorWarningBorder: '#ffe58f',
   colorError: '#ff4d4f',
   colorErrorHover: '#ff7875',
-  colorErrorActive: '#d9363e',
-  colorErrorBg: '#fff2f0',
+  colorErrorActive: '#cf1322',
+  colorErrorBg: '#fff1f0',
   colorErrorBorder: '#ffccc7',
 
   /* Text. */
