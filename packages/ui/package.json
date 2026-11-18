@@ -24,6 +24,7 @@
       "default": "./dist/footer/index.js"
     },
     "./*/styles.css": "./dist/*/styles.css",
+    "./tokens/*.css": "./dist/tokens/*.css",
     "./*": {
       "types": "./dist/*/index.d.ts",
       "import": "./dist/*/index.mjs",
@@ -37,7 +38,8 @@
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf .turbo node_modules dist",
     "test": "vitest run",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "tokens": "vitest run src/tokens/tests/tailwind.test.ts --update"
   },
   "peerDependencies": {
     "react": "^19.0.0",

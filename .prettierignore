@@ -4,3 +4,6 @@
 
 # Storybook MDX 3 isn't supported by Prettier's MDX parser.
 **/*.mdx
+
+# Generated from the Token Source by packages/ui/src/tokens/tailwind.ts; tests compare them byte for byte.
+packages/ui/src/tokens/*.css

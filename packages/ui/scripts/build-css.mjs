@@ -3,11 +3,13 @@
  * Compiles the Tailwind entry points in src/ into dist/:
  *   src/styles.css          -> dist/styles.css          (@repo/ui/styles.css)
  *   src/<component>/styles.css -> dist/<component>/styles.css (@repo/ui/<component>/styles.css)
+ * and copies the generated Tailwind Token Output uncompiled, for each Portal's own Tailwind build:
+ *   src/tokens/*.css        -> dist/tokens/*.css        (@repo/ui/tokens/<name>.css)
  *
  * The output has no preflight and no @layer blocks, so the library's prefixed utilities compete with
  * an app's CSS by normal specificity and source order instead of always losing to unlayered app CSS.
  */
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import postcss from 'postcss';
@@ -88,4 +90,12 @@ for (const from of entries) {
   console.log(
     `${relative(root, to)}  ${(new TextEncoder().encode(result.css).length / 1024).toFixed(1)} KiB`,
   );
+}
+
+const tokens = join(src, 'tokens');
+await mkdir(join(dist, 'tokens'), { recursive: true });
+for (const file of await readdir(tokens)) {
+  if (!file.endsWith('.css')) continue;
+  await copyFile(join(tokens, file), join(dist, 'tokens', file));
+  console.log(relative(root, join(dist, 'tokens', file)));
 }

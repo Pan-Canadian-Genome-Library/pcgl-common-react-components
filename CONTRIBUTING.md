@@ -76,7 +76,7 @@ import '@repo/ui/header/styles.css'; // or '@repo/ui/styles.css' for the whole l
 import { Header } from '@repo/ui/header'; // subpath imports bundle only that component's JS
 ```
 
-A component's `styles.css` imports `tailwindcss/theme.css` with `prefix(pcgl)`, the PCGL tokens from `@repo/tailwind-config/theme`, and `tailwindcss/utilities.css` with `source(none)`, then lists its own folder (and `../lib`) with `@source`.
+A component's `styles.css` imports `tailwindcss/theme.css` with `prefix(pcgl)`, the PCGL tokens from `../tokens/theme.css`, and `tailwindcss/utilities.css` with `source(none)`, then lists its own folder (and `../lib`) with `@source`.
 
 **Avoiding class collisions**
 
@@ -92,7 +92,7 @@ A component's `styles.css` imports `tailwindcss/theme.css` with `prefix(pcgl)`, 
 - Put utilities in markup; don't use `@apply` for component styles.
 - Write class names as complete literal strings (`'pcgl:bg-white'`, never `` `pcgl:bg-${color}` ``) so Tailwind can find them. Use [`cva`](https://cva.style) for variants.
 - Never set the same CSS property with two utilities on one element (for example a reset's `bg-transparent` and a variant's background): without `tailwind-merge`, there's no reliable winner.
-- Add colours and other shared values as tokens in `@repo/tailwind-config/theme` rather than repeated arbitrary values.
+- Add colours and other shared values to the Token Source in `packages/ui/src/tokens` rather than repeating arbitrary values, then run `pnpm --filter @repo/ui tokens` to regenerate the Tailwind stylesheets (`theme.css`, `research.css`, `daco.css`). Never edit those stylesheets by hand; a test fails when they are out of step with the Token Source.
 
 ## Turborepo conventions
 
