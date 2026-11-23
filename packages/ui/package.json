@@ -39,7 +39,7 @@
     "clean": "rm -rf .turbo node_modules dist",
     "test": "vitest run",
     "test:watch": "vitest --watch",
-    "tokens": "vitest run src/tokens/tests/tailwind.test.ts --update"
+    "tokens": "vitest run src/tokens/tests/tailwind.test.ts src/tokens/tests/antd.test.ts --update"
   },
   "peerDependencies": {
     "react": "^19.0.0",
