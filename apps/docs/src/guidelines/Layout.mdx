@@ -1,0 +1,28 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { Breakpoints, SpacingScale } from './blocks/layout';
+
+<Meta title="Guidelines/Layout" />
+
+# Layout
+
+Spacing and breakpoints are antd's defaults.
+
+## Spacing
+
+The unit is 4px. Use the steps below.
+
+<SpacingScale />
+
+> Tailwind's default spacing scale already uses a 4px unit, so the Tailwind output doesn't override it: `p-4` is antd's `size` (16px).
+
+## Breakpoints
+
+Tailwind's five breakpoint names take antd's widths. antd's `xs` (480px) and `xxxl` (1920px) have no Tailwind name and aren't part of the system.
+
+<Breakpoints />
+
+Content must reflow without horizontal scrolling at 320px wide (WCAG 1.4.10).
+
+**Errata**
+
+Layout units are not in the PDF.

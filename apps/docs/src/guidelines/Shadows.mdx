@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ShadowScale } from './blocks/layout';
+
+<Meta title="Guidelines/Shadows" />
+
+# Shadows
+
+Shadows are antd's defaults. 
+
+Use `boxShadow` (Tailwind `shadow-md`) for floating surfaces such as dropdowns, popovers and cards.
+> antd's `boxShadowSecondary` has the same value as `boxShadow`.
+
+Use `boxShadowTertiary` (`shadow-sm`) for a subtle lift.
+
+<ShadowScale />
+
+**Errata**
+
+We keep Tailwind's values and aren't part of the system.
+A shadow must never be the only thing that separates a control from its background.

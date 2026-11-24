@@ -1,0 +1,9 @@
+/*
+ * Loads the Research Theme's Tailwind Token Output, as a Tailwind Portal would.
+ * No preflight: Storybook's own docs styles stay as they are.
+ */
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import '@repo/ui/tokens/research.css';
+
+@source '../src';
