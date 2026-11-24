@@ -4,15 +4,15 @@ import postcss from 'postcss';
 import { describe, expect, it } from 'vitest';
 import { focusRing, fontFamilies, sharedColors, themes } from '..';
 import { antdThemes, dacoTheme, researchTheme } from '../antd';
-import { antdFocusOutput } from '../antd-focus';
+import { antdFocusOutput } from '../generators/antd-focus';
 
-const tokensDir = join(dirname(fileURLToPath(import.meta.url)), '..');
+const cssDir = join(dirname(fileURLToPath(import.meta.url)), '../css');
 
 describe('antd focus stylesheets', () => {
   it.each(Object.entries(antdFocusOutput()))(
     'the committed %s matches the Token Source',
     async (file, css) => {
-      await expect(css).toMatchFileSnapshot(join(tokensDir, file));
+      await expect(css).toMatchFileSnapshot(join(cssDir, file));
     },
   );
 

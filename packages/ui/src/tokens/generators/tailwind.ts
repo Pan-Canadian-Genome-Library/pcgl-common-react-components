@@ -6,10 +6,10 @@
  * `@repo/ui/tokens/theme.css` (shared) and `@repo/ui/tokens/<theme>.css` (one per Theme).
  * Regenerate them with `pnpm --filter @repo/ui tokens` after changing the Token Source.
  */
-import { brandPalette } from './brand-palette';
-import { focusRing, sharedColors, themes, type Theme, type ThemeName } from './colors';
-import { breakpoints, shadows } from './layout';
-import { fontFamilies, textStyles, type TextStyleName } from './typography';
+import { brandPalette } from '../source/brand-palette';
+import { focusRing, sharedColors, themes, type Theme, type ThemeName } from '../source/colors';
+import { breakpoints, shadows } from '../source/layout';
+import { fontFamilies, textStyles, type TextStyleName } from '../source/typography';
 
 const header = (source: string) =>
   `/* Generated from the Token Source by ${source}. Do not edit by hand: run \`pnpm --filter @repo/ui tokens\`. */`;
@@ -104,7 +104,7 @@ const textStyleUtilities = (): string =>
 /** The shared stylesheet: every token except a Theme's primary and link colours. */
 export const sharedThemeCss = (): string =>
   [
-    header('src/tokens/tailwind.ts'),
+    header('src/tokens/generators/tailwind.ts'),
     block(
       '@theme',
       'Brand Palette: decorative only; components use Role Tokens.',
@@ -136,7 +136,7 @@ export const themeCss = (name: ThemeName): string => {
   const theme: Theme = themes[name];
   return (
     [
-      header('src/tokens/tailwind.ts'),
+      header('src/tokens/generators/tailwind.ts'),
       "@import './theme.css';",
       block('@theme', `${theme.name} Theme.`, [
         ...roleEntries({ ...theme }),
@@ -146,7 +146,7 @@ export const themeCss = (name: ThemeName): string => {
   );
 };
 
-/** Every generated stylesheet, keyed by its file name in `src/tokens/`. */
+/** Every generated stylesheet, keyed by its file name in `src/tokens/css/`. */
 export const tailwindTokenOutput = (): Record<string, string> =>
   (Object.keys(themes) as ThemeName[]).reduce<Record<string, string>>(
     (files, name) => ({ ...files, [`${name}.css`]: themeCss(name) }),

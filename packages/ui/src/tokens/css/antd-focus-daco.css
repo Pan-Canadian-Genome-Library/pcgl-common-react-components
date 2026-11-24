@@ -1,4 +1,4 @@
-/* Generated from the Token Source by antd-focus.ts. Do not edit by hand: run `pnpm --filter @repo/ui tokens`. */
+/* Generated from the Token Source by src/tokens/generators/antd-focus.ts. Do not edit by hand: run `pnpm --filter @repo/ui tokens`. */
 
 /* DACO Theme focus ring for antd Portals. On a surface where this colour has less than 3:1 contrast, set the outline colour to #ffffff by hand. */
 :focus-visible {

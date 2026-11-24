@@ -9,10 +9,10 @@
  * antd components that still differ (for example ones that draw focus with a box-shadow) are
  * corrected by hand in the Portal, not here. Regenerate with `pnpm --filter @repo/ui tokens`.
  */
-import { focusRing, themes, type ThemeName } from './colors';
+import { focusRing, themes, type ThemeName } from '../source/colors';
 
 const header =
-  '/* Generated from the Token Source by antd-focus.ts. Do not edit by hand: run `pnpm --filter @repo/ui tokens`. */';
+  '/* Generated from the Token Source by src/tokens/generators/antd-focus.ts. Do not edit by hand: run `pnpm --filter @repo/ui tokens`. */';
 
 const stylesheet = (themeName: ThemeName): string =>
   `${header}
@@ -24,7 +24,7 @@ const stylesheet = (themeName: ThemeName): string =>
 }
 `;
 
-/** Every antd focus stylesheet, keyed by its file name in `src/tokens/`. */
+/** Every antd focus stylesheet, keyed by its file name in `src/tokens/css/`. */
 export const antdFocusOutput = (): Record<string, string> => {
   const files: Record<string, string> = {};
   (Object.keys(themes) as ThemeName[]).forEach((themeName) => {

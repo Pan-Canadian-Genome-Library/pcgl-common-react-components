@@ -4,15 +4,15 @@ import postcss from 'postcss';
 import tailwindcss from '@tailwindcss/postcss';
 import { describe, expect, it } from 'vitest';
 import { sharedColors, themes } from '..';
-import { tailwindTokenOutput } from '../tailwind';
+import { tailwindTokenOutput } from '../generators/tailwind';
 
-const tokensDir = join(dirname(fileURLToPath(import.meta.url)), '..');
+const cssDir = join(dirname(fileURLToPath(import.meta.url)), '../css');
 
-/** Compiles `css` as if it were a Portal stylesheet in `src/tokens/`, using only `candidates`. */
+/** Compiles `css` as if it were a Portal stylesheet in `src/tokens/css/`, using only `candidates`. */
 const compile = async (css: string, candidates: string[]): Promise<string> => {
-  const from = join(tokensDir, '__portal__.css');
+  const from = join(cssDir, '__portal__.css');
   const source = `${css}\n@source inline(${JSON.stringify(candidates.join(' '))});`;
-  const result = await postcss([tailwindcss({ base: tokensDir })]).process(source, { from });
+  const result = await postcss([tailwindcss({ base: cssDir })]).process(source, { from });
   return result.css;
 };
 
@@ -56,7 +56,7 @@ describe('Tailwind Token Output', () => {
   it.each(Object.entries(tailwindTokenOutput()))(
     'the committed %s matches the Token Source',
     async (file, css) => {
-      await expect(css).toMatchFileSnapshot(join(tokensDir, file));
+      await expect(css).toMatchFileSnapshot(join(cssDir, file));
     },
   );
 

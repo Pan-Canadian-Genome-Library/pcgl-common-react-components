@@ -11,8 +11,8 @@
  * The focus ring's colour and offset are not antd tokens; antd Portals also import the focus
  * stylesheet. antd's `focusOutline` token is a boolean switch and is not used.
  */
-import { focusRing, sharedColors, themes, type Theme, type ThemeName } from '../colors';
-import { fontFamilies } from '../typography';
+import { focusRing, sharedColors, themes, type Theme, type ThemeName } from '../source/colors';
+import { fontFamilies } from '../source/typography';
 
 const antdTheme = <T extends Theme>(theme: T) =>
   ({

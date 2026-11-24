@@ -1,6 +1,6 @@
 /* Per-component stylesheet: published as @repo/ui/header/styles.css. */
 @import 'tailwindcss/theme.css' prefix(pcgl);
-@import '../tokens/theme.css';
+@import '../tokens/css/theme.css';
 @import 'tailwindcss/utilities.css' source(none);
 
 @source './';
