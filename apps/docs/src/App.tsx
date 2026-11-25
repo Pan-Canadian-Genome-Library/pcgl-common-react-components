@@ -8,7 +8,12 @@ import './App.css';
 function App() {
   return (
     <>
-      <AnnouncementBanner locale='en' translator={(s:string)=> s} owner='Pan-Canadian-Genome-Library' repo='pcgl-common-react-components'/>
+      <AnnouncementBanner
+        locale="en"
+        translator={(s: string) => s}
+        owner="Pan-Canadian-Genome-Library"
+        repo="pcgl-common-react-components"
+      />
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
