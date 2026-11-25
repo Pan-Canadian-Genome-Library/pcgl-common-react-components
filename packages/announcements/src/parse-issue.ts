@@ -44,7 +44,6 @@ const readSections = (body: string): Map<string, string> => {
 export const issueToAnnouncement = (issue: GithubIssue): Announcement | null => {
   if (issue.pull_request || !trustedAuthors.has(issue.author_association)) return null;
 
-  console.log({ i: issue });
   const sections = readSections(issue.body ?? '');
   const type = sections.get(fields.type) ?? '';
   const enTitle = issue.title.replace(titlePrefix, '').trim();
