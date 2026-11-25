@@ -1,0 +1,185 @@
+/* Generated from the Token Source by src/tokens/generators/tailwind.ts. Do not edit by hand: run `pnpm --filter @repo/ui tokens`. */
+
+@theme {
+  /* Brand Palette: decorative only; components use Role Tokens. */
+  --color-red: #ec1c24;
+  --color-red-tint-1: #f83c44;
+  --color-red-tint-2: #f4575e;
+  --color-red-tint-3: #f16b71;
+  --color-red-tint-4: #f48287;
+  --color-red-tint-5: #f4a1a4;
+  --color-cool-gray: #929497;
+  --color-cool-gray-tint-1: #a6a9ad;
+  --color-cool-gray-tint-2: #babec4;
+  --color-cool-gray-tint-3: #c7cbd1;
+  --color-cool-gray-tint-4: #dde1e6;
+  --color-cool-gray-tint-5: #eaedf1;
+  --color-pansy-purple: #761248;
+  --color-pansy-purple-tint-1: #843961;
+  --color-pansy-purple-tint-2: #9d587d;
+  --color-pansy-purple-tint-3: #b27696;
+  --color-pansy-purple-tint-4: #cb9eb6;
+  --color-pansy-purple-tint-5: #ddc3d1;
+  --color-deep-blue: #054a74;
+  --color-deep-blue-tint-1: #155680;
+  --color-deep-blue-tint-2: #1f6592;
+  --color-deep-blue-tint-3: #2b7aad;
+  --color-deep-blue-tint-4: #4794c6;
+  --color-deep-blue-tint-5: #60aadb;
+  --color-light-sea-green: #25bea2;
+  --color-light-sea-green-tint-1: #30cbae;
+  --color-light-sea-green-tint-2: #41e0c2;
+  --color-light-sea-green-tint-3: #56eed1;
+  --color-light-sea-green-tint-4: #87f5e0;
+  --color-light-sea-green-tint-5: #abf7e8;
+  --color-steel-blue: #3d7ea5;
+  --color-steel-blue-tint-1: #4c88ac;
+  --color-steel-blue-tint-2: #5992b5;
+  --color-steel-blue-tint-3: #6ba3c5;
+  --color-steel-blue-tint-4: #7bb2d3;
+  --color-steel-blue-tint-5: #96cae9;
+  --color-dusty-rose: #dfc7c5;
+  --color-dusty-rose-tint-1: #e3ccca;
+  --color-dusty-rose-tint-2: #e9d5d3;
+  --color-dusty-rose-tint-3: #e9dcdb;
+  --color-dusty-rose-tint-4: #eee3e2;
+  --color-dusty-rose-tint-5: #f2ebeb;
+  --color-black: #000000;
+  --color-black-tint-1: #2c2c2c;
+  --color-black-tint-2: #434343;
+  --color-black-tint-3: #656565;
+  --color-black-tint-4: #8e8e8e;
+  --color-black-tint-5: #bababa;
+}
+
+@theme {
+  /* Shared Role Tokens, named after antd tokens. */
+  --color-primary-bg: #eaedf1;
+  --color-primary-bg-hover: #dde1e6;
+  --color-success: #52c41a;
+  --color-success-hover: #95de64;
+  --color-success-active: #389e0d;
+  --color-success-bg: #f6ffed;
+  --color-success-border: #b7eb8f;
+  --color-info: #1677ff;
+  --color-info-hover: #69b1ff;
+  --color-info-active: #0958d9;
+  --color-info-bg: #e6f4ff;
+  --color-info-border: #91caff;
+  --color-warning: #faad14;
+  --color-warning-hover: #ffd666;
+  --color-warning-active: #d48806;
+  --color-warning-bg: #fffbe6;
+  --color-warning-border: #ffe58f;
+  --color-error: #ff4d4f;
+  --color-error-hover: #ff7875;
+  --color-error-active: #cf1322;
+  --color-error-bg: #fff1f0;
+  --color-error-border: #ffccc7;
+  --color-text: rgba(0, 0, 0, 0.88);
+  --color-text-secondary: rgba(0, 0, 0, 0.65);
+  --color-text-tertiary: rgba(0, 0, 0, 0.55);
+  --color-text-quaternary: rgba(0, 0, 0, 0.25);
+  --color-text-disabled: rgba(0, 0, 0, 0.25);
+  --color-text-placeholder: rgba(0, 0, 0, 0.25);
+  --color-border: #d9d9d9;
+  --color-border-secondary: #f0f0f0;
+  --color-bg-container: #ffffff;
+  --color-bg-layout: #f5f5f5;
+  --color-bg-elevated: #ffffff;
+  --color-bg-mask: rgba(0, 0, 0, 0.45);
+  --color-focus-ring-contrast: #ffffff;
+}
+
+@theme {
+  /* Typography: antd sizes and line heights, PCGL families. */
+  --font-heading: Jost, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-body: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --text-xs: 0.75rem;
+  --text-xs--line-height: calc(20 / 12);
+  --text-sm: 0.875rem;
+  --text-sm--line-height: calc(22 / 14);
+  --text-base: 1rem;
+  --text-base--line-height: calc(24 / 16);
+  --text-xl: 1.25rem;
+  --text-xl--line-height: calc(28 / 20);
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: calc(32 / 24);
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: calc(38 / 30);
+  --text-4xl: 2.375rem;
+  --text-4xl--line-height: calc(46 / 38);
+}
+
+@theme {
+  /* Layout: antd breakpoints and shadows. */
+  --breakpoint-sm: 36rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 62rem;
+  --breakpoint-xl: 75rem;
+  --breakpoint-2xl: 100rem;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px 0 rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+
+@theme {
+  /* Focus ring: 2px outline, 2px offset. */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}
+
+@utility heading-1 {
+  font-family: --theme(--font-heading);
+  color: --theme(--color-text);
+  font-weight: 600;
+  font-size: 2.375rem;
+  line-height: calc(46 / 38);
+}
+
+@utility heading-2 {
+  font-family: --theme(--font-heading);
+  color: --theme(--color-text);
+  font-weight: 600;
+  font-size: 1.875rem;
+  line-height: calc(38 / 30);
+}
+
+@utility heading-3 {
+  font-family: --theme(--font-heading);
+  color: --theme(--color-text);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: calc(32 / 24);
+}
+
+@utility heading-4 {
+  font-family: --theme(--font-heading);
+  color: --theme(--color-text);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: calc(28 / 20);
+}
+
+@utility heading-5 {
+  font-family: --theme(--font-heading);
+  color: --theme(--color-text);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: calc(24 / 16);
+}
+
+@utility body-text {
+  font-family: --theme(--font-body);
+  color: --theme(--color-text);
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: calc(22 / 14);
+}
+
+@utility small-text {
+  font-family: --theme(--font-body);
+  color: --theme(--color-text);
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: calc(20 / 12);
+}

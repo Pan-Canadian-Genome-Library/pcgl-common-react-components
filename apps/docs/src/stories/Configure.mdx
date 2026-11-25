@@ -6,27 +6,11 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 Write your custom guidelines, documentation, or configuration notes.
 
+For requirements, setup and commands, see the [project README on GitHub](https://github.com/Pan-Canadian-Genome-Library/pcgl-common-react-components/blob/main/README.md).
+
 ## Doc blocks
 
 Storybook offers several [doc blocks](https://storybook.js.org/docs/writing-docs/doc-blocks) to help document your components and other aspects of your project.
-
-
-### Why can't I use the Doc Blocks inside my stories?
-
-Storybook's Doc Blocks are highly customizable and helpful building blocks to assist you with building your custom documentation. Although most of them enable you to customize them with parameters or globally to create custom [documentation templates](#customizing-the-automatic-docs-page), they are primarily designed for MDX files. For example, if you try to add the `ColorPalette` block to your stories as follows, you'll get an error message when the story loads in Storybook.
-
-```tsx
-// ❌ Don't use the Doc Blocks inside your stories. It will break Storybook with a cryptic error.
-export const Colors: Story = {
-  render: () => (
-    
-      {Object.entries(theme.colors).map(([key, { value }]) => (
-        
-      ))}
-    
-  ),
-};
-```
 
 **Learn more about Storybook documentation**
 

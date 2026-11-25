@@ -6,6 +6,7 @@ export default defineConfig((options) => ({
     'src/**/*.tsx',
     '!src/**/*.d.ts',
     '!src/**/tests/**',
+    '!src/**/generators/**',
     '!src/**/*.test.*',
     '!src/**/*.stories.*',
   ],

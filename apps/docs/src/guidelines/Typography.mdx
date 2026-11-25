@@ -1,0 +1,51 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks';
+import { FontFamilies, TypeScale, TypeTable } from './blocks/typography';
+import { NotDefined } from './blocks/ui';
+import { antdHeadingRule, googleFontsLink } from './blocks/snippets';
+
+<Meta title="Guidelines/Typography" />
+
+# Typography
+
+Headings use **Jost** and body text uses **Work Sans**, as the Brand Guidelines define. 
+
+The sizes, line heights and weights are antd's defaults. 
+
+## Scale
+
+Each sample below uses its Tailwind text-style utility.
+
+<TypeScale />
+
+<TypeTable />
+
+
+## Families and weights
+
+Each family falls back to antd's system font stack. Every heading and strong text uses weight 600; body and small text use 400.
+
+<FontFamilies />
+
+## Headings in antd Portals
+
+antd has a single `fontFamily` token, which the antd theme object sets to Work Sans. antd Portals add this rule so headings use Jost:
+
+<Source language="css" code={antdHeadingRule} />
+
+## Loading the fonts
+
+The library ships no font files. Each Portal loads them, for example from Google Fonts:
+
+<Source language="html" code={googleFontsLink} />
+
+**Notes**
+
+Tailwind's `text-lg` and `text-5xl` upward keep Tailwind's values and aren't part of the system.
+
+Bold weight is 700.
+
+Sizes are in rem in the Tailwind output, so text scales to 200% (WCAG 1.4.4). Body text has a line height of at least 1.5 (WCAG 1.4.12).
+
+> Futura PT, the other typeface in the Brand Guidelines, isn't part of the system. <NotDefined />
+
+Each utility sets the family, colour, weight, size and line height in one class, and works with variants (`md:heading-2`).

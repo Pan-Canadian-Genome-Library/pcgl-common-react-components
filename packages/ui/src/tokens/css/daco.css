@@ -1,0 +1,16 @@
+/* Generated from the Token Source by src/tokens/generators/tailwind.ts. Do not edit by hand: run `pnpm --filter @repo/ui tokens`. */
+
+@import './theme.css';
+
+@theme {
+  /* DACO Theme. */
+  --color-primary: #761248;
+  --color-primary-hover: #822855;
+  --color-primary-active: #4f0830;
+  --color-primary-border: #9c627b;
+  --color-primary-border-hover: #8f4366;
+  --color-link: #761248;
+  --color-link-hover: #8f4366;
+  --color-link-active: #4f0830;
+  --color-focus-ring: #761248;
+}
