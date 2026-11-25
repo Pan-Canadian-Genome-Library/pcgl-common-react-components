@@ -1,0 +1,16 @@
+/* Generated from the Token Source by src/tokens/generators/tailwind.ts. Do not edit by hand: run `pnpm --filter @repo/ui tokens`. */
+
+@import './theme.css';
+
+@theme {
+  /* Research Theme. */
+  --color-primary: #054a74;
+  --color-primary-hover: #195c80;
+  --color-primary-active: #002d4d;
+  --color-primary-border: #508499;
+  --color-primary-border-hover: #32708c;
+  --color-link: #054a74;
+  --color-link-hover: #32708c;
+  --color-link-active: #002d4d;
+  --color-focus-ring: #054a74;
+}

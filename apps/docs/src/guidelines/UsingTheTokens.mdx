@@ -1,0 +1,86 @@
+import { Meta, Source, Markdown } from '@storybook/addon-docs/blocks';
+import themeCss from '@repo/ui/tokens/theme.css?raw';
+import researchCss from '@repo/ui/tokens/research.css?raw';
+import dacoCss from '@repo/ui/tokens/daco.css?raw';
+import antdFocusResearchCss from '@repo/ui/tokens/antd-focus-research.css?raw';
+import {
+  antdObject,
+  antdSetup,
+  brandPropUsage,
+  tailwindNoThemeSetup,
+  tailwindSetup,
+  tailwindUsage,
+} from './blocks/snippets';
+
+<Meta title="Guidelines/Using the tokens" />
+
+# Using the tokens
+
+Every token comes from one Token Source in `@repo/ui`. Two outputs are generated from it: a Tailwind theme for Tailwind Portals and a theme object for antd Portals. 
+Pick the one for your Portal, then your Portal's Theme. Both kinds of Portal also load the fonts; see [Typography](?path=/docs/guidelines-typography--docs).
+
+
+> 🫣 Also you can copy and paste the values in your own implementation for a quick adoption instead of installing the whole library, configuring typescript or ant theme.
+
+
+## Tailwind Portals
+
+Install `@repo/ui`, then import Tailwind and your Theme's stylesheet. That's the whole setup; you don't need any shared component.
+
+<Source language="css" code={tailwindSetup('research')} />
+
+Tailwind's utilities now use PCGL values, and the antd-named colours are available:
+
+<Source language="html" code={tailwindUsage} />
+
+The stylesheets are published uncompiled, so your Portal's own Tailwind build processes them and emits only the utilities you use.
+
+### A Portal without a Theme yet
+
+Import the shared stylesheet and set the primary and link colours yourself:
+
+<Source language="css" code={tailwindNoThemeSetup} />
+
+## antd Portals
+
+Pass your Theme's object to `ConfigProvider`, and import your Theme's focus stylesheet:
+
+<Source language="tsx" code={antdSetup('research')} />
+
+> Important: 
+
+- The object sets every shade explicitly, so an antd upgrade can't change PCGL colours. It uses only token names that exist in antd 5 and antd 6.
+- It imports nothing from antd. Your Portal's compiler checks it against antd's `ThemeConfig` when you pass it to `ConfigProvider`, so a wrong token name fails your build.
+- The focus stylesheet sets the focus ring's colour and offset on `:focus-visible`, which antd tokens can't do. The object sets its width (`lineWidthFocus: 2`). antd components that draw focus another way, such as with a box shadow, are corrected in the Portal.
+- Add the heading rule from [Typography](?path=/docs/guidelines-typography--docs) so headings use Jost.
+
+The Research Theme's object:
+
+<Source language="json" code={antdObject('research')} />
+
+
+The Daco Theme's object:
+
+<Source language="json" code={antdObject('daco')} />
+
+## Header and footer
+
+Pass your Theme's primary colour to the header and footer `brand` prop:
+
+<Source language="tsx" code={brandPropUsage} />
+
+## The generated Tailwind theme
+
+These are the published stylesheets, read-only. To change a value, edit the Token Source in `packages/ui/src/tokens/` and run `pnpm --filter @repo/ui tokens`.
+
+### `@repo/ui/tokens/theme.css` (shared)
+
+<Source language="css" code={themeCss} />
+
+### `@repo/ui/tokens/research.css`
+
+<Source language="css" code={researchCss} />
+
+### `@repo/ui/tokens/daco.css`
+
+<Source language="css" code={dacoCss} />

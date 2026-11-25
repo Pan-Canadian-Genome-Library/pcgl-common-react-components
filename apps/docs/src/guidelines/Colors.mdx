@@ -1,0 +1,107 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import {
+  BrandPalette,
+  Errata,
+  FocusRingSurfaces,
+  NeutralPairings,
+  RoleTokens,
+  StatusPairings,
+  StatusVariants,
+  ThemePreview,
+  TransparentTextOnWhite,
+} from './blocks/colors';
+import { NotDefined } from './blocks/ui';
+
+
+<Meta title="Guidelines/Colors" />
+
+# Colors
+
+Every value on this page is read from the Token Source, `@repo/ui/tokens`. The system has two layers:
+
+- The **Brand Palette** holds the colours of the PCGL Brand Guidelines (v2.0).
+- **Role Tokens** say what a colour is for. They're named after antd's tokens (`colorPrimary`, `colorErrorBg`) and, in Tailwind, the same names in kebab case (`primary`, `error-bg`). <i>Components use Role Tokens only, never a literal colour or a Brand Palette colour.</i>
+
+
+## Brand Palette
+
+Some tints are **decorative only**: don't use them for hover, active, selected or any other state. 
+
+<BrandPalette />
+
+> Cool Gray's two lightest tints are the shared primary background shades (`colorPrimaryBg` and `colorPrimaryBgHover`).
+
+## Themes
+
+A Theme is the primary and link colour of one Portal, with their hover, active and border shades. Everything else is shared by every Theme. 
+ > 🧛 There is no dark mode yet.
+
+Portals pass their Theme's primary colour to the header and footer `brand` prop, as below. 
+```jsx
+  <ThemePreview name="research" />
+```
+
+### Research Theme (Deep Blue)
+
+<ThemePreview name="research" />
+
+### DACO Theme (Pansy Purple)
+
+<ThemePreview name="daco" />
+
+## Role Tokens
+
+The neutral text, border and surface tokens are shared by every Theme. 
+> They're antd's defaults, apart from the values changed for accessibility.
+
+<RoleTokens />
+
+### Text 
+
+<TransparentTextOnWhite />
+
+> The placeholder colour has 1.83:1 on white, so a placeholder must never be the only label or instruction.
+
+<NotDefined>Text tokens are black at an opacity, similar colour are:</NotDefined>
+
+### Text pairings
+
+<NeutralPairings />
+
+## Variants
+
+Each role has shades for its states: base, hover, active, background and border. The primary shades are in the Themes above. The primary background shades (`colorPrimaryBg`, `colorPrimaryBgHover`) are shared by every Theme, so a selected item is a light grey in every Portal.
+
+### Status colours
+
+<StatusVariants />
+
+### Status Pairs
+Use the following  combinations:
+
+<StatusPairings />
+
+> ```🦮 Success (2.27:1) and warning (1.90:1) are below 3:1 on white. ```
+> 
+> **Always state a status in text**; never rely on colour or an icon alone. 
+> Write status text in `colorText` on the status background. 
+> Only the info and error active shades reach 4.5:1 on their backgrounds; 
+> the success and warning shades are for icons, borders and decoration, not text.
+
+## Focus ring
+
+Every focusable element shows a 2px outline with a 2px offset, in the Theme's primary colour (`--color-focus-ring` in Tailwind). 
+On a surface where primary has less than 3:1 contrast, use white instead (`--color-focus-ring-contrast`). 
+Black is not a step. Pick the step per surface when you write the component.
+
+> 
+
+<FocusRingSurfaces />
+
+
+## Brand Guidelines errata
+
+The Brand Guidelines PDF (v2.0) contradicts itself in a few places. 
+Where its hex and RGB values disagree, the hex value wins.
+<Errata />
+The p.13 in the PDF secondary tonal chart also includes Deep Blue among the secondary colours

@@ -1,7 +1,15 @@
+import './guidelines.css';
 import type { Preview } from '@storybook/react-vite';
 
 const preview: Preview = {
   parameters: {
+    docs: {
+      toc: {
+        headingSelector: 'h2, h3',
+        title: 'On this page',
+      },
+    },
+
     controls: {
       matchers: {
         color: /(background|color)$/i,
