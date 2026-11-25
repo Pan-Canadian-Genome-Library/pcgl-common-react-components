@@ -2,11 +2,18 @@ import Footer from './components/Footer';
 import heroImg from './assets/hero.png';
 import reactLogo from './assets/react.svg';
 import viteLogo from './assets/vite.svg';
+import { AnnouncementBanner } from '@repo/announcements';
 import './App.css';
 
 function App() {
   return (
     <>
+      <AnnouncementBanner
+        locale="en"
+        translator={(s: string) => s}
+        owner="Pan-Canadian-Genome-Library"
+        repo="pcgl-common-react-components"
+      />
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />

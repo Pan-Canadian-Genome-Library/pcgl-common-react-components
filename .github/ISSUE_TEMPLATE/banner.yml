@@ -1,0 +1,53 @@
+name: Announcement
+description: Publish a banner on the PCGL portals. Close the issue to hide it.
+title: "[Announcement]: "
+labels: ["announcement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The issue title (without the "[Announcement]: " prefix) is the English banner title.
+        Only issues opened by owners, members or collaborators of this repository are shown.
+        The newest open announcement is shown; close the issue to hide it.
+
+  - type: dropdown
+    id: announcementType
+    attributes:
+      label: Announcement type
+      description: Choose the announcement type.
+      options:
+        - success
+        - info
+        - warning
+        - error
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description (EN)
+      description: Text shown under the title.
+      placeholder: We are performing scheduled maintenance.
+    validations:
+      required: true
+
+  - type: input
+    id: titleTranslation
+    attributes:
+      label: Title (FR)
+      description: "Titre d'annonce."
+      placeholder: Maintenance planifiée
+    validations:
+      required: true
+
+  - type: textarea
+    id: descriptionTranslation
+    attributes:
+      label: Description (FR)
+      description: Texte affiché sous le titre.
+      placeholder: Nous effectuons une maintenance planifiée.
+    validations:
+      required: true
