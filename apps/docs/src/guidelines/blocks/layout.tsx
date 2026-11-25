@@ -1,5 +1,5 @@
 /** Blocks for the Layout, Radius and Shadows pages, rendered from the Token Source. */
-import { breakpoints, radius, shadows, sharedColors, spacing } from '@repo/ui/tokens';
+import { breakpoints, radius, shadows, spacing } from '@repo/ui/tokens';
 import { Block, Cell, Code, Row, Table } from './ui';
 
 const upper = (word: string) => word.toUpperCase();
@@ -26,13 +26,8 @@ export const SpacingScale = () => (
           <Cell>
             <span
               aria-hidden
-              style={{
-                display: 'inline-block',
-                width: spacing[key],
-                height: 16,
-                background: sharedColors.colorPrimaryBgHover,
-                boxShadow: `inset 0 0 0 1px ${sharedColors.colorBorder}`,
-              }}
+              className="inline-block h-4 bg-primary-bg-hover ring-1 ring-border ring-inset"
+              style={{ width: spacing[key] }}
             />
           </Cell>
         </Row>
@@ -91,14 +86,8 @@ export const RadiusScale = () => (
           <Cell>
             <span
               aria-hidden
-              style={{
-                display: 'inline-block',
-                width: 64,
-                height: 40,
-                borderRadius: radius[key],
-                border: `1px solid ${sharedColors.colorBorder}`,
-                background: sharedColors.colorBgLayout,
-              }}
+              className="inline-block h-10 w-16 border border-border bg-bg-layout"
+              style={{ borderRadius: radius[key] }}
             />
           </Cell>
         </Row>
@@ -117,26 +106,12 @@ const shadowNames = Object.keys(shadows) as (keyof typeof shadows)[];
 
 export const ShadowScale = () => (
   <Block>
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: 32,
-        padding: '24px 16px',
-        background: sharedColors.colorBgLayout,
-        borderRadius: 8,
-      }}
-    >
+    <div className="flex flex-wrap gap-8 rounded-lg bg-bg-layout px-4 py-6">
       {shadowNames.map((key) => (
         <div
           key={key}
-          style={{
-            width: 220,
-            padding: 16,
-            borderRadius: 8,
-            background: sharedColors.colorBgElevated,
-            boxShadow: shadows[key],
-          }}
+          className="w-56 rounded-lg bg-bg-elevated p-4"
+          style={{ boxShadow: shadows[key] }}
         >
           <div>
             <Code>{key}</Code>
@@ -157,7 +132,7 @@ export const ShadowScale = () => (
             <Code>{tailwindShadow[key]}</Code>
           </Cell>
           <Cell>
-            <span style={{ fontSize: 12 }}>{shadows[key]}</span>
+            <span className="text-xs">{shadows[key]}</span>
           </Cell>
         </Row>
       ))}

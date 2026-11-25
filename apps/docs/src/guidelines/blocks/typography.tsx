@@ -44,12 +44,9 @@ export const TypeScale = () => (
     {styleNames.map((name) => {
       const style = textStyles[name];
       return (
-        <div
-          key={name}
-          style={{ padding: '16px 0', borderBottom: '1px solid rgba(0, 0, 0, 0.06)' }}
-        >
+        <div key={name} className="border-b border-border-secondary py-4">
           <div className={names[name].utility}>The Pan-Canadian Genome Library</div>
-          <div style={{ fontSize: 12, lineHeight: '20px', marginTop: 4 }}>
+          <div className="mt-1 text-xs">
             <Code>{names[name].utility}</Code> · {style.fontSize}/{style.lineHeight}px (
             {style.fontSize / 16}rem) · weight {style.fontWeight} · {style.fontFamily} family
           </div>
@@ -101,17 +98,14 @@ export const FontFamilies = () => (
           </Cell>
           <Cell>
             <span
-              style={{
-                fontFamily: fontFamilies[name],
-                fontSize: 20,
-                fontWeight: fontWeights.strong,
-              }}
+              className="text-xl"
+              style={{ fontFamily: fontFamilies[name], fontWeight: fontWeights.strong }}
             >
               Genome Aa 123
             </span>
           </Cell>
           <Cell>
-            <span style={{ fontSize: 12 }}>{fontFamilies[name]}</span>
+            <span className="text-xs">{fontFamilies[name]}</span>
           </Cell>
         </Row>
       ))}

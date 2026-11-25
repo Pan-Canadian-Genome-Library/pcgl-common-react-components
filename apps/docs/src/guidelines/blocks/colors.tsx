@@ -16,6 +16,7 @@ import {
 import { FooterContainer } from '@repo/ui/footer';
 import { Header, HeaderButton, HeaderNavLink } from '@repo/ui/header';
 import '@repo/ui/header/styles.css';
+import { toHex, toHexOnWhite, toHsl } from './color-format';
 import { Block, Cell, Code, NotDefined, PairingTable, Row, Table, type Pairing } from './ui';
 
 const white = sharedColors.colorBgContainer;
@@ -31,51 +32,6 @@ const tailwindName = (antdName: string): string =>
 const kebab = (name: string): string => name.replace(/[A-Z]/g, (l) => `-${l.toLowerCase()}`);
 
 /* ------------------------------------------------------------------ Swatches */
-
-/** A token colour (`#rrggbb` or `rgba(r, g, b, a)`) as its channels; alpha is 1 for hex. */
-const channels = (color: string): [number, number, number, number] => {
-  if (color.startsWith('#')) {
-    const value = Number.parseInt(color.slice(1, 7), 16);
-    return [(value >> 16) & 255, (value >> 8) & 255, value & 255, 1];
-  }
-  const [r = 0, g = 0, b = 0, a = 1] = (color.match(/[\d.]+/g) ?? []).map(Number);
-  return [r, g, b, a];
-};
-
-const toHex = (color: string): string => {
-  const [r, g, b, a] = channels(color);
-  const alpha = a < 1 ? Math.round(a * 255) : undefined;
-  return `#${[r, g, b, alpha]
-    .filter((part): part is number => part !== undefined)
-    .map((part) => part.toString(16).padStart(2, '0'))
-    .join('')
-    .toUpperCase()}`;
-};
-
-/** `#3DB866` -> `140 50 48`: hue, saturation and lightness, rounded, with ` / a` when transparent. */
-const toHsl = (color: string): string => {
-  const [r, g, b, a] = channels(color).map((part, index) => (index < 3 ? part / 255 : part)) as [
-    number,
-    number,
-    number,
-    number,
-  ];
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  const l = (max + min) / 2;
-  const d = max - min;
-  const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
-  const h =
-    d === 0
-      ? 0
-      : max === r
-        ? 60 * (((g - b) / d) % 6)
-        : max === g
-          ? 60 * ((b - r) / d + 2)
-          : 60 * ((r - g) / d + 4);
-  const hsl = [(h + 360) % 360, s * 100, l * 100].map(Math.round).join(' ');
-  return a < 1 ? `${hsl} / ${a}` : hsl;
-};
 
 interface Swatch {
   name: string;
@@ -98,25 +54,15 @@ const SwatchCard = ({ name, value, details = [] }: Swatch) => {
   ];
   return (
     <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        gap: 24,
-        minHeight: 200,
-        padding: 12,
-        borderRadius: 6,
-        background: value,
-        color: ink,
-        boxShadow: `inset 0 0 0 1px ${sharedColors.colorBorderSecondary}`,
-      }}
+      className="flex min-h-50 flex-col justify-between gap-6 rounded-md p-3 ring-1 ring-border-secondary ring-inset"
+      style={{ background: value, color: ink }}
     >
-      <div style={{ fontSize: 13, fontWeight: 600, overflowWrap: 'anywhere' }}>{name}</div>
-      <div style={{ fontSize: 11, lineHeight: '20px' }}>
+      <div className="text-sm font-semibold wrap-anywhere">{name}</div>
+      <div className="text-xs">
         {lines.map(([label, content]) => (
-          <div key={label} style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
-            <span style={{ opacity: 0.65, whiteSpace: 'nowrap' }}>{label}</span>
-            <span style={{ textAlign: 'right', overflowWrap: 'anywhere' }}>{content}</span>
+          <div key={label} className="flex justify-between gap-2">
+            <span className="whitespace-nowrap opacity-65">{label}</span>
+            <span className="text-right wrap-anywhere">{content}</span>
           </div>
         ))}
       </div>
@@ -125,15 +71,10 @@ const SwatchCard = ({ name, value, details = [] }: Swatch) => {
 };
 
 const SwatchGroup = ({ title, swatches }: { title?: ReactNode; swatches: Swatch[] }) => (
-  <div style={{ marginBottom: 32 }}>
-    {title && <div style={{ fontSize: 20, fontWeight: 600, margin: '8px 0 16px' }}>{title}</div>}
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))',
-        gap: 8,
-      }}
-    >
+  <div className="mb-8">
+    {title && <div className="mt-2 mb-4 text-xl font-semibold">{title}</div>}
+    {/* Arbitrary value: no utility fills a row with as many 170px-minimum cards as fit. */}
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-2">
       {swatches.map((swatch) => (
         <SwatchCard key={swatch.name} {...swatch} />
       ))}
@@ -158,7 +99,7 @@ const BrandRow = ({ id, color }: { id: string; color: BrandColor }) => {
     <SwatchGroup
       title={
         <>
-          {color.name} <span style={{ fontWeight: 400 }}>({color.group})</span>
+          {color.name} <span className="font-normal">({color.group})</span>
         </>
       }
       swatches={steps.map(([name, value], index) => ({
@@ -368,7 +309,7 @@ export const ThemePreview = ({ name }: { name: ThemeName }) => {
   return (
     <Block>
       <VariantStrip entries={themeKeys.map((key): [string, string] => [key, theme[key]])} />
-      <p style={{ margin: '16px 0' }}>
+      <p className="my-4">
         <Code>colorPrimary</Code> and <Code>colorLink</Code> come from the Brand Guidelines. The
         other shades come from antd's colour algorithm <NotDefined />
       </p>
@@ -398,17 +339,11 @@ export const ThemePreview = ({ name }: { name: ThemeName }) => {
           },
         ]}
       />
-      <div
-        style={{
-          border: `1px solid ${sharedColors.colorBorder}`,
-          borderRadius: 8,
-          overflow: 'hidden',
-        }}
-      >
+      <div className="overflow-hidden rounded-lg border border-border">
         <Header
           brand={theme.colorPrimary}
           translator={translate(headerMessages)}
-          logo={<span style={{ fontSize: 24, fontWeight: 600 }}>PCGL {theme.name}</span>}
+          logo={<span className="text-2xl font-semibold">PCGL {theme.name}</span>}
           nav={
             <>
               <HeaderNavLink href="#guidelines" current>
@@ -455,17 +390,10 @@ const surfaces: Surface[] = [
 ];
 
 const FocusSample = ({ surface, ring }: { surface: string; ring: string }) => (
-  <span style={{ display: 'inline-block', background: surface, padding: 8, borderRadius: 6 }}>
+  <span className="inline-block rounded-md p-2" style={{ background: surface }}>
     <span
-      style={{
-        display: 'inline-block',
-        width: 32,
-        height: 16,
-        borderRadius: 4,
-        background: sharedColors.colorBorder,
-        outline: `${focusRing.width}px solid ${ring}`,
-        outlineOffset: focusRing.offset,
-      }}
+      className="inline-block h-4 w-8 rounded-sm bg-border"
+      style={{ outline: `${focusRing.width}px solid ${ring}`, outlineOffset: focusRing.offset }}
     />
   </span>
 );
@@ -489,7 +417,7 @@ export const FocusRingSurfaces = () => (
             const ratio = usePrimary ? primaryRatio : contrastRatio(focusRing.contrastColor, bg);
             return (
               <Cell key={name}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
+                <span className="inline-flex items-center gap-3">
                   <FocusSample surface={bg} ring={ring} />
                   <span>
                     {usePrimary ? 'Primary' : 'White'} ({ratio.toFixed(2)}:1)
@@ -587,37 +515,28 @@ export const Errata = () => (
   </Block>
 );
 
-/** The transparent text Role Tokens as rgba, as hex with an alpha channel, and as the solid hex each renders as on white. */
-const transparentTextOnWhite = [
-  {
-    names: ['colorTextSecondary'],
-    rgba: 'rgba(0, 0, 0, 0.65)',
-    hexAlpha: '#000000a6',
-    hex: '#595959',
-  },
-  {
-    names: ['colorTextTertiary'],
-    rgba: 'rgba(0, 0, 0, 0.55)',
-    hexAlpha: '#0000008c',
-    hex: '#737373',
-  },
-  {
-    names: ['colorTextQuaternary', 'colorTextDisabled', 'colorTextPlaceholder'],
-    rgba: 'rgba(0, 0, 0, 0.25)',
-    hexAlpha: '#00000040',
-    hex: '#bfbfbf',
-  },
+/** The transparent text Role Tokens, grouped by value; each group shares one rgba. */
+const transparentText: SharedColorName[][] = [
+  ['colorTextSecondary'],
+  ['colorTextTertiary'],
+  ['colorTextQuaternary', 'colorTextDisabled', 'colorTextPlaceholder'],
 ];
 
+/** Each transparent text token as rgba, as hex with an alpha channel, and as the solid hex it renders as on white. */
 export const TransparentTextOnWhite = () => (
   <ColorPalette>
-    {transparentTextOnWhite.map(({ names, rgba, hexAlpha, hex }) => (
-      <ColorItem
-        key={rgba}
-        title={names.join(', ')}
-        subtitle={`${rgba} = ${hexAlpha}; ${hex} on white`}
-        colors={{ rgba, 'hex with alpha': hexAlpha, 'hex on white': hex }}
-      />
-    ))}
+    {transparentText.map((names) => {
+      const rgba = sharedColors[names[0] as SharedColorName];
+      const hexAlpha = toHex(rgba);
+      const hex = toHexOnWhite(rgba);
+      return (
+        <ColorItem
+          key={rgba}
+          title={names.join(', ')}
+          subtitle={`${rgba} = ${hexAlpha}; ${hex} on white`}
+          colors={{ rgba, 'hex with alpha': hexAlpha, 'hex on white': hex }}
+        />
+      );
+    })}
   </ColorPalette>
 );
