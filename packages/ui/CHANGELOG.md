@@ -1,5 +1,14 @@
 # @repo/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- 54772b3: Add the Design Token Source as `@repo/ui/tokens`: Brand Palette, Research and DACO Themes, shared Role Tokens, typography, spacing, radius, shadows, breakpoints and a `contrastRatio` helper
+- 54772b3: Add Banner component, Announcement type and defaultAnnouncements; add a banner slot to Header; add status colour Role Tokens
+- 54772b3: Add the antd Token Output: pass `researchTheme` or `dacoTheme` from `@repo/ui/tokens/antd` to antd's `ConfigProvider` for PCGL colours, fonts and a 2px focus width, and import `@repo/ui/tokens/antd-focus-research.css` or `@repo/ui/tokens/antd-focus-daco.css` for the focus ring's colour and offset
+- 54772b3: Add the Tailwind Token Output: import `@repo/ui/tokens/research.css` or `@repo/ui/tokens/daco.css` after Tailwind to give Tailwind utilities PCGL values (antd-named colours such as `bg-primary` and `text-error`, antd breakpoints, line heights and shadows, and `heading-1` to `heading-5`, `body-text` and `small-text`). The library's stylesheets now take the same tokens, so `text-xs`, `text-sm` and `shadow-md` in the header and Banner follow antd's values
+
 ## 0.2.0
 
 ### Minor Changes
